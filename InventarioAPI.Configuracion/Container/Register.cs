@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCore.AutoRegisterDi;
 using System.Reflection;
+using InventarioAPI.Infraestructura.Database.Contextos;
 
 namespace InventarioAPI.Configuracion.Container
 {
@@ -18,10 +19,10 @@ namespace InventarioAPI.Configuracion.Container
             #endregion
 
             #region [Inyectar dependencia de contexto de BD]
-            //services.AddDbContext<EcommerceContext>(options =>
-            //{
-            //    options.UseSqlServer(configuration.GetConnectionString("SQLConnection"));
-            //});
+            services.AddDbContext<InventarioContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("SQLConnection"));
+            });
             #endregion
 
             #region [Configuracion de CORS]
@@ -37,8 +38,6 @@ namespace InventarioAPI.Configuracion.Container
             #endregion
 
             #region [Inyeccion de Dependencias]
-            //services.AddScoped<IClientesRepository, ClientesRepository>();
-            //services.AddScoped<IClientesService, ClientesService>();
 
             var assembliesToScan = new[]
              {
