@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using InventarioAPI.Infraestructura.Database.Contextos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using NetCore.AutoRegisterDi;
 using System.Reflection;
-using InventarioAPI.Infraestructura.Database.Contextos;
 
 namespace InventarioAPI.Configuracion.Container
 {
@@ -50,6 +52,28 @@ namespace InventarioAPI.Configuracion.Container
                 .Where(c => c.Name.EndsWith("Repository") ||
                        c.Name.EndsWith("Service"))
                 .AsPublicImplementedInterfaces();
+            #endregion
+
+            #region [Configuracion de JWT]
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"], // Set your issuer
+                    ValidAudience = configuration["Jwt:Audience"], // Set your audience
+                    IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(configuration["Jwt:key"]))
+                };
+            }
+
+
+            ) ; 
+
+
             #endregion
         }
     }

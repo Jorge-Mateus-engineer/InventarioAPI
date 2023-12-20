@@ -24,8 +24,9 @@ namespace InventarioAPI
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); //Para usar el JWT
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

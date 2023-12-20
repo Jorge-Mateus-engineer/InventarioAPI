@@ -7,10 +7,10 @@ using System.Text;
 
 namespace InventarioAPI.Comunes.Clases.Helpers.JWT
 {
-    public class JWTHandler
+    public class JWTGenerator
     {
         private readonly IConfiguration _configuration;
-        public JWTHandler(IConfiguration configuration)
+        public JWTGenerator(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -49,37 +49,6 @@ namespace InventarioAPI.Comunes.Clases.Helpers.JWT
 
             // Return the generated JWT token
             return jwt;
-        }
-
-        public bool ValidateToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var validationParameters = GetValidationParameters();
-
-            try
-            {
-                SecurityToken validatedToken;
-                tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-                return true;
-            }
-            catch (SecurityTokenException)
-            {
-                return false;
-            }
-        }
-
-        private TokenValidationParameters GetValidationParameters()
-        {
-            return new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = _configuration["Jwt:Issuer"], // Set your issuer
-                ValidAudience = _configuration["Jwt:Audience"], // Set your audience
-                IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(_configuration["Jwt:key"]))
-            };
         }
 
     }
