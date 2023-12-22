@@ -6,6 +6,7 @@ namespace InventarioAPI.Infraestructura.Repositorios.Compras
     {
         List<CompraEntity> GetAll();
         List<CompraEntity> GetByClientId(int id);
+        CompraEntity GetById(int id);
         CompraEntity Insert(CompraEntity entity);
         CompraEntity Update(CompraEntity entity);
         void Delete(CompraEntity entity);

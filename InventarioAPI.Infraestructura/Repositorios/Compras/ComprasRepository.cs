@@ -28,6 +28,11 @@ namespace InventarioAPI.Infraestructura.Repositorios.Compras
             return _context.Compras.Where(c => c.id_cliente == id).ToList();
         }
 
+        public CompraEntity GetById(int id)
+        {
+            return _context.Compras.Find(id);
+        }
+
         public CompraEntity Insert(CompraEntity entity)
         {
             _context.Compras.Add(entity);
