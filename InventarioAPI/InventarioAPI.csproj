@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InventarioAPI.Configuracion\InventarioAPI.Configuracion.csproj" />
     <ProjectReference Include="..\InventarioAPI.Dominio\InventarioAPI.Dominio.csproj" />
   </ItemGroup>
 

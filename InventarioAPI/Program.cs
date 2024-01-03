@@ -1,3 +1,5 @@
+using InventarioAPI.Configuracion.Container;
+
 namespace InventarioAPI
 {
     public class Program
@@ -12,6 +14,9 @@ namespace InventarioAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Register custom services and configurations using a separate method
+            Register.Configuracion(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 

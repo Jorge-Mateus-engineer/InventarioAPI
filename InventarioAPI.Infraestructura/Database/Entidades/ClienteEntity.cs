@@ -14,7 +14,7 @@ namespace InventarioAPI.Infraestructura.Database.Entidades
         public string segundo_apellido { get; set; }
         public string correo { get; set; }
         public string telefono { get; set; }
-        public string contraseña_encriptada { get; set; }
+        public string contrasena_encriptada { get; set; }
         public byte[] salt { get; set; }
     }
 }

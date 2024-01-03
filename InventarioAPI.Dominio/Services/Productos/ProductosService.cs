@@ -28,7 +28,7 @@ namespace InventarioAPI.Dominio.Services.Productos
 
         public List<ProductoContract> GetByCategory(int categoryID)
         {
-            return _mapper.Map<List<ProductoContract>>(_productosRepository.GetByCategory(categoryID);
+            return _mapper.Map<List<ProductoContract>>(_productosRepository.GetByCategory(categoryID));
         }
 
         public ProductoContract GetById(int id)
@@ -38,12 +38,12 @@ namespace InventarioAPI.Dominio.Services.Productos
 
         public ProductoContract GetByName(string name)
         {
-            return _mapper.Map<ProductoContract>(_productosRepository.GetByName(name);
+            return _mapper.Map<ProductoContract>(_productosRepository.GetByName(name));
         }
 
         public List<ProductoContract> GetByProviderID(int providerID)
         {
-            return _mapper.Map<List<ProductoContract>>(_productosRepository.GetByProviderID(providerID);
+            return _mapper.Map<List<ProductoContract>>(_productosRepository.GetByProviderID(providerID));
         }
 
         public ProductoContract Insert(ProductoContract contract)

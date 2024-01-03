@@ -3,12 +3,12 @@ using InventarioAPI.Infraestructura.Database.Entidades;
 
 namespace InventarioAPI.Infraestructura.Repositorios.Clientes
 {
-    public class ClientesRpository : IClienteRepository
+    public class ClientesRepository : IClienteRepository
     {
 
         private readonly InventarioContext _context;
 
-        public ClientesRpository(InventarioContext context)
+        public ClientesRepository(InventarioContext context)
         {
             _context = context;
         }

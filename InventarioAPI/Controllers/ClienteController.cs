@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventarioAPI.Comunes.Clases.Contratos;
+using InventarioAPI.Dominio.Services.Clientes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InventarioAPI.Controllers
 {
@@ -6,10 +8,17 @@ namespace InventarioAPI.Controllers
     [ApiController]
     public class ClienteController : Controller
     {
-        //private readonly IClienteService
-        public IActionResult Index()
+        private readonly IClientesService _clientesService;
+        public ClienteController(IClientesService clientesService)
         {
-            return View();
+            _clientesService = clientesService;
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<ClienteContract> clientes = _clientesService.GetAll();
+            return Ok(clientes);
         }
     }
 }

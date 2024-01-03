@@ -5,12 +5,12 @@ using InventarioAPI.Infraestructura.Repositorios.Clientes;
 
 namespace InventarioAPI.Dominio.Services.Clientes
 {
-    public class CientesService : IClientesService
+    public class ClientesService : IClientesService
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
 
-        public CientesService(IClienteRepository clienteRepository, IMapper mapper)
+        public ClientesService(IClienteRepository clienteRepository, IMapper mapper)
         {
             _clienteRepository = clienteRepository;
             _mapper = mapper;

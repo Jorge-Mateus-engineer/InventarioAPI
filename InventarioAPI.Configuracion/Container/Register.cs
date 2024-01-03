@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NetCore.AutoRegisterDi;
 using System.Reflection;
+using System.Text;
 
 namespace InventarioAPI.Configuracion.Container
 {
@@ -44,9 +45,9 @@ namespace InventarioAPI.Configuracion.Container
             var assembliesToScan = new[]
              {
                 Assembly.GetExecutingAssembly(),
-                Assembly.Load("ECommerceAPI.Dominio"),
-                Assembly.Load("ECommerceAPI.Infraestructura"),
-                Assembly.Load("ECommerceAPI.Comunes"),
+                Assembly.Load("InventarioAPI.Dominio"),
+                Assembly.Load("InventarioAPI.Infraestructura"),
+                Assembly.Load("InventarioAPI.Comunes"),
             };
             services.RegisterAssemblyPublicNonGenericClasses(assembliesToScan)
                 .Where(c => c.Name.EndsWith("Repository") ||
@@ -66,7 +67,7 @@ namespace InventarioAPI.Configuracion.Container
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["Jwt:Issuer"], // Set your issuer
                     ValidAudience = configuration["Jwt:Audience"], // Set your audience
-                    IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(configuration["Jwt:key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
                 };
             }
 

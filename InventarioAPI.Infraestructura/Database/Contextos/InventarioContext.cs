@@ -22,5 +22,11 @@ namespace InventarioAPI.Infraestructura.Database.Contextos
         {
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configure the keyless entity
+            modelBuilder.Entity<DisponibilidadEntity>().HasNoKey();
+        }
     }
 }
