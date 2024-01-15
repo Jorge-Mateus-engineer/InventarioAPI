@@ -5,19 +5,19 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace InventarioAPI.Comunes.Clases.Helpers.JWT
+namespace InventarioAPI.Dominio.Services.Comunes
 {
-    public class JWTGenerator
+    public class JWTService : IJWTService
     {
         private readonly IConfiguration _configuration;
-        public JWTGenerator(IConfiguration configuration)
+        public JWTService(IConfiguration configuration)
         {
-            _configuration = configuration;
+           _configuration = configuration;
         }
 
-        public string GenerateToken(ClienteContract cliente)
+        public string GetJWT(ClienteContract clienteContract)
         {
-            string id = cliente.id_cliente.ToString();
+            string id = clienteContract.id_cliente.ToString();
             // Generate a list of claims for the payload of our token
             List<Claim> claims = new List<Claim>()
             {                        
@@ -50,6 +50,5 @@ namespace InventarioAPI.Comunes.Clases.Helpers.JWT
             // Return the generated JWT token
             return jwt;
         }
-
     }
 }
