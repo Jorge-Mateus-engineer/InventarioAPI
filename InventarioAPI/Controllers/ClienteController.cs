@@ -23,7 +23,6 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult GetAll()
         {
-            string token = _jwtService.GetJWT(new ClienteContract() { id_cliente = 1 });
             List<ClienteContract> clientes = _clientesService.GetAll();
             return Ok(clientes);
         }
@@ -47,11 +46,19 @@ namespace InventarioAPI.Controllers
             return Ok(cliente);
         }
 
+        [HttpDelete]
+        [Route("[Action]")]
+        [Authorize]
+        public IActionResult DeleteClient(ClienteContract cliente)
+        {
+            _clientesService.Delete(cliente);
+            return NoContent();
+        }
+
         [HttpPost]
         [Route("[Action]")]
         public IActionResult SignUp(ClienteContract cliente)
         {
-            string JWT;
             _clientesService.Insert(cliente);
             var datos = new
             {
@@ -71,9 +78,7 @@ namespace InventarioAPI.Controllers
             (ClienteContract cliente, string contrasena_enc, byte[] salt) = _clientesService.FindByEmail(correo);
             if (cliente != null)
             {
-
-                bool resultado = Encriptador.ComparePasswords(contrasena, contrasena_enc, salt);
-                if (resultado)
+                if (Encriptador.ComparePasswords(contrasena, contrasena_enc, salt))
                 {
                     string JWT = _jwtService.GetJWT(cliente);
                     return Ok(JWT);
