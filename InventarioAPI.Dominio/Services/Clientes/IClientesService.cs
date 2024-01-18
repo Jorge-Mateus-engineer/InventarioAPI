@@ -6,7 +6,7 @@ namespace InventarioAPI.Dominio.Services.Clientes
     {
         List<ClienteContract> GetAll();
         ClienteContract GetById(int id);
-        ClienteContract GetByEmail(string email);
+        (ClienteContract?, string, byte[]) FindByEmail(string email);
         ClienteContract Insert(ClienteContract contract);
         ClienteContract Update(ClienteContract contract);
         void Delete(ClienteContract contract);
