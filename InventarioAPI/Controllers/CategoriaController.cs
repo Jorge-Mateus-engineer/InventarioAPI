@@ -7,11 +7,10 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+
     public class CategoriaController : Controller
     {
         private readonly ICategoriaService _categoriaService;
-
         public CategoriaController(ICategoriaService categoriaService)
         {
             _categoriaService = categoriaService;
@@ -51,8 +50,8 @@ namespace InventarioAPI.Controllers
             CategoriaContract categoriaContract = _categoriaService.GetByName(categoria.nombre);
             if (categoriaContract != null)
             {
-                _categoriaService.Update(categoriaContract);
-                return Ok(categoriaContract);
+                _categoriaService.Update(categoria);
+                return Ok(categoria);
             }
             else
             {
@@ -65,7 +64,6 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Delete(CategoriaContract categoria)
         {
-
             CategoriaContract categoriaContract = _categoriaService.GetByName(categoria.nombre);
             if (categoriaContract != null)
             {
