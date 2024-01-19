@@ -12,7 +12,7 @@ namespace InventarioAPI.Infraestructura.Database.Entidades
         public string descripcion { get; set; }
         public int id_categoria { get; set; }
         public string unidad {  get; set; }
-        public float valor_unitario { get; set; }
+        public float precio_unitario { get; set; }
         public int id_proveedor { get; set; }
 
     }

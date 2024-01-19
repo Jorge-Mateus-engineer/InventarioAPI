@@ -5,12 +5,12 @@ using InventarioAPI.Infraestructura.Repositorios.DetalleCompras;
 
 namespace InventarioAPI.Dominio.Services.DetalleCompras
 {
-    public class DetalleComprasSerivce : IDetalleComprasService
+    public class DetalleComprasService : IDetalleComprasService
     {
         private readonly IDetalleCompraRepository _detalleCompraRepository;
         private readonly IMapper _mapper;
 
-        public DetalleComprasSerivce(IDetalleCompraRepository detalleCompraRepository, IMapper mapper)
+        public DetalleComprasService(IDetalleCompraRepository detalleCompraRepository, IMapper mapper)
         {
             _detalleCompraRepository = detalleCompraRepository;
             _mapper = mapper;

@@ -28,9 +28,9 @@ namespace InventarioAPI.Infraestructura.Repositorios.Proveedores
             return _context.Proveedores.Where(p => p.nombre_empresa.ToLower() == companyName.ToLower()).ToList();
         }
 
-        public List<ProveedorEntity> GetByEmail(string email)
+        public ProveedorEntity GetByEmail(string email)
         {
-            return _context.Proveedores.Where(p => p.email.ToLower() == email.ToLower()).ToList();
+            return _context.Proveedores.Where(p => p.email.ToLower() == email.ToLower()).Single();
         }
 
         public ProveedorEntity Insert(ProveedorEntity entity)
