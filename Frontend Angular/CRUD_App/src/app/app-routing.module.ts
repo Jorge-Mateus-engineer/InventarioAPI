@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from 'src/components/shared/authentication/authentication.component';
 import { UsersComponent } from 'src/components/Users/Users.component';
 import { ProductsComponent } from 'src/components/Products/Products.component';
+import { ListUsersComponent } from 'src/components/Users/list-users/list-users.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UsersComponent,
+    children: [
+      { path: '', component: UsersComponent },
+      { path: 'edit', component: ListUsersComponent },
+    ],
   },
   { path: 'products', component: ProductsComponent },
 ];

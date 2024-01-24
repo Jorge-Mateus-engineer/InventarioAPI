@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'CRUD_App';
+  title = 'CRUD App';
   navLinks: any[];
   activeLinkIndex = -1;
 

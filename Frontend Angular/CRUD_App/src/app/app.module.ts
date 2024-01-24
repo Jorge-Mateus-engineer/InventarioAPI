@@ -7,8 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import { UsersComponent } from 'src/components/Users/Users.component';
+import { CrudUIComponent } from 'src/components/shared/crud-UI/crud-UI.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UsersComponent, CrudUIComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,0 +1,20 @@
+<main class="CRUD-UI">
+  <ul class="navigation-links">
+    <li
+      *ngFor="let action of actionList"
+      [class.active]="action.text === selectedAction"
+      (click)="selectItem(action.text)"
+    >
+      <a
+        class="links"
+        routerLink="{{ action.link }}"
+        routerLinkActive="router-link-active"
+        >{{ action.text }} {{ tableName }}</a
+      >
+    </li>
+  </ul>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</main>
