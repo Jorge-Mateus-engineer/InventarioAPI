@@ -1,0 +1,14 @@
+@import "../../../../src/styles.scss";
+
+.admin-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-button {
+  padding: 1rem 0;
+  flex-grow: 1;
+  text-align: center;
+  background-color: $accent;
+  color: $text;
+}
