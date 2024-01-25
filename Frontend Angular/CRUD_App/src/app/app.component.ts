@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,34 +7,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'CRUD App';
-  navLinks: any[];
-  activeLinkIndex = -1;
 
-  constructor(private router: Router) {
-    this.navLinks = [
-      {
-        label: 'Login',
-        link: '/login',
-        index: 0,
-      },
-      {
-        label: 'Users',
-        link: '/users',
-        index: 0,
-      },
-      {
-        label: 'Products',
-        link: '/products',
-        index: 0,
-      },
-    ];
-  }
-
-  ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(
-        this.navLinks.find((tab) => tab.link === '.' + this.router.url)
-      );
-    });
-  }
+  constructor() {}
 }

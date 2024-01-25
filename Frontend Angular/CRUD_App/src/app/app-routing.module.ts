@@ -1,30 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationComponent } from './layouts/authentication/authentication.component';
+import { AdminComponent } from './layouts/admin/admin.component';
 
 /*Component imports */
-import { AuthenticationComponent } from 'src/components/shared/authentication/authentication.component';
-import { UsersComponent } from 'src/components/Users/Users.component';
-import { ProductsComponent } from 'src/components/Products/Products.component';
-import { ListUsersComponent } from 'src/components/Users/list-users/list-users.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/auth/login',
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: 'auth',
     component: AuthenticationComponent,
-  },
-  {
-    path: 'users',
     children: [
-      { path: '', component: UsersComponent },
-      { path: 'edit', component: ListUsersComponent },
+      {
+        path: 'login',
+        loadChildren: () =>
+          import('./views/authentication/login/login.module').then(
+            (m) => m.LoginModule
+          ),
+      },
+      {
+        path: 'register',
+        loadChildren: () =>
+          import('./views/authentication/register/register.module').then(
+            (m) => m.RegisterModule
+          ),
+      },
     ],
   },
-  { path: 'products', component: ProductsComponent },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./views/admin/home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./views/admin/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({

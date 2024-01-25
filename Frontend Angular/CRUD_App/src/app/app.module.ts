@@ -6,12 +6,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
-import { UsersComponent } from 'src/components/Users/Users.component';
-import { CrudUIComponent } from 'src/components/shared/crud-UI/crud-UI.component';
+import { AdminComponent } from './layouts/admin/admin.component';
+import { AuthenticationComponent } from './layouts/authentication/authentication.component';
 
 @NgModule({
-  declarations: [AppComponent, UsersComponent, CrudUIComponent],
+  declarations: [AppComponent, AdminComponent, AuthenticationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
