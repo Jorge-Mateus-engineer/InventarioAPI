@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AuthenticationComponent } from './layouts/authentication/authentication.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, AdminComponent, AuthenticationComponent],
@@ -17,6 +18,7 @@ import { AuthenticationComponent } from './layouts/authentication/authentication
     BrowserAnimationsModule,
     MatTabsModule,
     MatSidenavModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

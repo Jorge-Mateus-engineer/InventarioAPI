@@ -1,6 +1,16 @@
-<nav class="admin-nav">
-  <div class="nav-button" (click)="home()">Home</div>
-  <div class="nav-button" (click)="profile()">Profile</div>
-  <div class="nav-button" (click)="logout()">Log out</div>
+<h1>Basic CRUD application</h1>
+<nav mat-tab-nav-bar>
+  <a
+    mat-tab-link
+    *ngFor="let link of navLinks"
+    [routerLink]="link.link"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    <mat-icon>{{ link.icon }}</mat-icon>
+    {{ link.label }}
+  </a>
 </nav>
+<mat-icon>home</mat-icon>
 <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,18 +6,60 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent {
-  constructor(private router: Router) {}
+export class AdminComponent implements OnInit {
+  navLinks: any[];
+  activeLinkIndex = -1;
 
-  home(): void {
-    this.router.navigate(['admin', 'home']);
+  constructor(private router: Router) {
+    this.navLinks = [
+      {
+        label: 'Bodegas',
+        link: '/admin/home',
+        icon: 'account_balance',
+      },
+      {
+        label: 'Categorias',
+        link: '/admin/profile',
+        icon: 'shop',
+      },
+      {
+        label: 'Clientes',
+        link: '/auth/login',
+        icon: 'face',
+      },
+      {
+        label: 'Compras',
+        link: '/admin/home',
+        icon: 'shopping_cart',
+      },
+      {
+        label: 'Detalle Compras',
+        link: '/admin/home',
+        icon: 'search',
+      },
+      {
+        label: 'Productos',
+        link: '/admin/home',
+        icon: 'shopping_cart',
+      },
+      {
+        label: 'Disponibilidad Productos',
+        link: '/admin/home',
+        icon: 'ballot',
+      },
+      {
+        label: 'Proveedores',
+        link: '/admin/home',
+        icon: 'perm_identity',
+      },
+    ];
   }
 
-  profile(): void {
-    this.router.navigate(['admin', 'profile']);
-  }
-
-  logout(): void {
-    this.router.navigate(['auth', 'login']);
+  ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+      this.activeLinkIndex = this.navLinks.indexOf(
+        this.navLinks.find((tab) => tab.link === '.' + this.router.url)
+      );
+    });
   }
 }

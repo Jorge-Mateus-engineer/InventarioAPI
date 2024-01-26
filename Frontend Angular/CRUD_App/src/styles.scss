@@ -1,8 +1,8 @@
-@import "@angular/material/_theming";
+// @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-$text: rgba(255, 255, 255, 0.87);
-$primary: map-get($mat-deep-purple, 500);
-$accent: map-get($mat-indigo, A200);
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -11,7 +11,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 body {
   margin: 0;
