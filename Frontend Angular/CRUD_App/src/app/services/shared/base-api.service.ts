@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BaseAPIService {
   public headers: HttpHeaders;
-  public API_ROOT = 'https://eccomerce-api-v2.azurewebsites.net/';
+  public API_ROOT = 'https://localhost:7027/';
 
   constructor(protected _httpClient: HttpClient) {
     this.headers = new HttpHeaders({

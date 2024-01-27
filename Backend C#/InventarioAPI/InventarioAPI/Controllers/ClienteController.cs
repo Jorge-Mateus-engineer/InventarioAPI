@@ -73,15 +73,19 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        public IActionResult SignIn(string correo, string contrasena)
+        public IActionResult SignIn([FromBody] AuthenticationContract authenticationContract)
         {
-            (ClienteContract cliente, string contrasena_enc, byte[] salt) = _clientesService.FindByEmail(correo);
+            (ClienteContract cliente, string contrasena_enc, byte[] salt) = _clientesService.FindByEmail(authenticationContract.correo);
             if (cliente != null)
             {
-                if (Encriptador.ComparePasswords(contrasena, contrasena_enc, salt))
+                if (Encriptador.ComparePasswords(authenticationContract.contrasena, contrasena_enc, salt))
                 {
-                    string JWT = _jwtService.GetJWT(cliente);
-                    return Ok(JWT);
+                    var datos = new
+                    {
+                        JWT = _jwtService.GetJWT(cliente),
+                    };
+
+                    return Ok(datos);
                 }
                 else
                 {

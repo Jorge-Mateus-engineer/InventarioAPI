@@ -26,7 +26,7 @@ namespace InventarioAPI.Infraestructura.Repositorios.Clientes
 
         public ClienteEntity GetByEmail(string email)
         {
-            return _context.Clientes.Where(c => c.correo == email).Single();
+            return _context.Clientes.SingleOrDefault(c => c.correo == email);
         }
 
         public ClienteEntity GetById(int id)
