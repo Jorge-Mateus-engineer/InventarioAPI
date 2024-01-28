@@ -36,6 +36,7 @@ namespace InventarioAPI.Configuracion.Container
                     builder.AllowAnyOrigin();
                     builder.AllowAnyMethod();
                     builder.AllowAnyHeader();
+
                 });
             });
             #endregion
@@ -56,7 +57,8 @@ namespace InventarioAPI.Configuracion.Container
             #endregion
 
             #region [Configuracion de JWT]
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
                 options.RequireHttpsMetadata = false;
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters()
@@ -72,7 +74,7 @@ namespace InventarioAPI.Configuracion.Container
             }
 
 
-            ) ; 
+            );
 
 
             #endregion
