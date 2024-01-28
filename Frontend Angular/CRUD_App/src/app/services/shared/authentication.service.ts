@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseAPIService } from './base-api.service';
 import { AuthenticationModel } from 'src/app/models/Authentication/authentication.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { AuthResponseModel } from 'src/app/models/Authentication/authResponse.model';
 
 @Injectable({
@@ -20,6 +20,12 @@ export class AuthenticationService extends BaseAPIService {
       'api/Cliente/SignIn',
       authenticationModel,
       false
-    ).pipe(map((res) => res.jwt));
+    ).pipe(
+      map((res) => res.jwt),
+      catchError((err) => {
+        console.log(err);
+        throw err;
+      })
+    );
   }
 }

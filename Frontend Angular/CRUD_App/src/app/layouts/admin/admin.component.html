@@ -1,5 +1,5 @@
 <h1>Basic CRUD application</h1>
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
   <a
     mat-tab-link
     *ngFor="let link of navLinks"
@@ -12,5 +12,6 @@
     {{ link.label }}
   </a>
 </nav>
-<mat-icon>home</mat-icon>
-<router-outlet></router-outlet>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

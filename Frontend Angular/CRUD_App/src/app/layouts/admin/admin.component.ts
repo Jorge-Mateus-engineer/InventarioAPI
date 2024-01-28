@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
       },
       {
         label: 'Categorias',
-        link: '/admin/profile',
+        link: '/admin/table',
         icon: 'shop',
       },
       {

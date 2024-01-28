@@ -47,6 +47,11 @@ const routes: Routes = [
             (m) => m.ProfileModule
           ),
       },
+      {
+        path: 'table',
+        loadChildren: () =>
+          import('./views/admin/table/table.module').then((m) => m.TableModule),
+      },
     ],
   },
 ];

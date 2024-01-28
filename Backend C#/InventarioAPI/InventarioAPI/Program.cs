@@ -27,6 +27,8 @@ namespace InventarioAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("PoliticaCors"); // Apply CORS policy here
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication(); //Para usar el JWT

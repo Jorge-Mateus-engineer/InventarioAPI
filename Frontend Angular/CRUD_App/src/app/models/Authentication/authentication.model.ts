@@ -1,9 +1,9 @@
 export class AuthenticationModel {
-  email: String;
-  password: String;
+  correo: String;
+  contrasena: String;
 
   constructor() {
-    this.email = '';
-    this.password = '';
+    this.correo = '';
+    this.contrasena = '';
   }
 }
