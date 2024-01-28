@@ -14,45 +14,49 @@ export class AdminComponent implements OnInit {
     this.navLinks = [
       {
         label: 'Bodegas',
-        link: '/admin/home',
+        link: '/admin/bodegas',
         icon: 'account_balance',
       },
       {
         label: 'Categorias',
-        link: '/admin/table',
+        link: '/admin/categorias',
         icon: 'shop',
       },
       {
         label: 'Clientes',
-        link: '/auth/login',
+        link: '/admin/clientes',
         icon: 'face',
       },
       {
         label: 'Compras',
-        link: '/admin/home',
+        link: '/admin/compras',
         icon: 'shopping_cart',
       },
       {
         label: 'Detalle Compras',
-        link: '/admin/home',
+        link: '/admin/detalleCompras',
         icon: 'search',
       },
       {
         label: 'Productos',
-        link: '/admin/home',
+        link: '/admin/productos',
         icon: 'shopping_cart',
       },
       {
         label: 'Disponibilidad Productos',
-        link: '/admin/home',
+        link: '/admin/disponibilidad',
         icon: 'ballot',
       },
       {
         label: 'Proveedores',
-        link: '/admin/home',
+        link: '/admin/proveedores',
         icon: 'perm_identity',
       },
     ];
+  }
+
+  logout(): void {
+    this.router.navigate(['auth']);
   }
 
   ngOnInit(): void {

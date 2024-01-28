@@ -16,8 +16,8 @@ export class LoginComponent {
     private _authenticationService: AuthenticationService
   ) {}
 
-  home(): void {
-    this.router.navigate(['admin', 'home']);
+  admin(): void {
+    this.router.navigate(['admin']);
   }
 
   onSubmit() {
