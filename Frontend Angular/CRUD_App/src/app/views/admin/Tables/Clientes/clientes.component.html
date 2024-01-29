@@ -1,4 +1,7 @@
 <app-list
   [modelsList]="models"
   [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="setClientEdit($event)"
+  (emitModelToDelete)="setClientToDelete($event)"
 ></app-list>
+<app-update></app-update>

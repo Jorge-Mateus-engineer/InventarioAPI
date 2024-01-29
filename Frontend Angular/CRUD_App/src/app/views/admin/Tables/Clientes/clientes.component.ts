@@ -11,6 +11,18 @@ export class ClientesComponent implements OnInit {
   models: Array<ClienteModel> = [];
   headersAndProperties: any[];
 
+  clientToEdit: ClienteModel = new ClienteModel();
+  clientToDelete: ClienteModel = new ClienteModel();
+
+  setClientEdit(cliente: any) {
+    this.clientToEdit = cliente as ClienteModel;
+  }
+
+  setClientToDelete(cliente: any) {
+    this.clientToDelete = cliente as ClienteModel;
+    console.log(cliente);
+  }
+
   constructor(private clienteService: ClientesService) {
     this.headersAndProperties = [
       { header: 'Id Cliente', property: 'id_cliente' },

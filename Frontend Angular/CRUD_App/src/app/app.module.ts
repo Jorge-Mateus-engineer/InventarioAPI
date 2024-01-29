@@ -29,7 +29,6 @@ import { RegisterComponent } from './views/authentication/register/register.comp
     LoginComponent,
     RegisterComponent,
     ReadComponent,
-    UpdateComponent,
     DeleteComponent,
   ],
   imports: [
