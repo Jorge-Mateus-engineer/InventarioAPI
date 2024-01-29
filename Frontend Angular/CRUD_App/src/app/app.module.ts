@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReadComponent } from './views/shared/read/read.component';
 import { UpdateComponent } from './views/shared/update/update.component';
 import { DeleteComponent } from './views/shared/delete/delete.component';
-import { DetalleComprasComponent } from './views/admin/Tables/Detalle_Compras/detalle-compras.component';
+import { RegisterComponent } from './views/authentication/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { DetalleComprasComponent } from './views/admin/Tables/Detalle_Compras/de
     AdminComponent,
     AuthenticationComponent,
     LoginComponent,
+    RegisterComponent,
     ReadComponent,
     UpdateComponent,
     DeleteComponent,

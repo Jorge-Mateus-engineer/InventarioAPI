@@ -4,6 +4,7 @@ import { AuthenticationModel } from 'src/app/models/Authentication/authenticatio
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 import { AuthResponseModel } from 'src/app/models/Authentication/authResponse.model';
+import { ClienteModel } from 'src/app/models/Clientes/cliente.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,19 @@ export class AuthenticationService extends BaseAPIService {
       catchError((err) => {
         console.log(err);
         throw err;
+      })
+    );
+  }
+
+  public createAccount(clienteModel: ClienteModel): Observable<ClienteModel> {
+    return this.post<ClienteModel>(
+      'api/Cliente/SignUp',
+      clienteModel,
+      false
+    ).pipe(
+      map((res) => {
+        console.log(res);
+        return res;
       })
     );
   }

@@ -4,6 +4,7 @@ using InventarioAPI.Dominio.Services.Clientes;
 using InventarioAPI.Dominio.Services.Comunes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace InventarioAPI.Controllers
 {
@@ -69,6 +70,7 @@ namespace InventarioAPI.Controllers
 
             //Regresa un statusCode 201 (created)
             return CreatedAtAction("SignUp", datos);
+             
         }
 
         [HttpPost]

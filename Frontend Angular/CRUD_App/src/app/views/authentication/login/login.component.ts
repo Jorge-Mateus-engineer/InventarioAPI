@@ -20,7 +20,7 @@ export class LoginComponent {
     this.router.navigate(['admin']);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this._authenticationService
       .loginToAPI(this.userCredentials)
       .subscribe((val) => console.log(val));
