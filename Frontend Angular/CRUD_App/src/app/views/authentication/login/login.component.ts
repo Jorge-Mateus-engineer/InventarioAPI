@@ -23,6 +23,6 @@ export class LoginComponent {
   onSubmit(): void {
     this._authenticationService
       .loginToAPI(this.userCredentials)
-      .subscribe((val) => console.log(val));
+      .subscribe((val) => localStorage.setItem('token', val as string));
   }
 }

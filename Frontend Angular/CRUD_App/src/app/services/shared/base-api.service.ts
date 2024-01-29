@@ -125,7 +125,7 @@ export class BaseAPIService {
    */
   public delete<Tmodel>(
     endPoint: string,
-    id: number,
+    id: Number,
     addAuthorization?: boolean
   ): Observable<Tmodel> {
     if (addAuthorization) {

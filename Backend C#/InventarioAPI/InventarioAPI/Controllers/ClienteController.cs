@@ -50,8 +50,9 @@ namespace InventarioAPI.Controllers
         [HttpDelete]
         [Route("[Action]")]
         [Authorize]
-        public IActionResult DeleteClient(ClienteContract cliente)
+        public IActionResult DeleteClient(int id)
         {
+            ClienteContract cliente = _clientesService.GetById(id);
             _clientesService.Delete(cliente);
             return NoContent();
         }
