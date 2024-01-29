@@ -58,7 +58,10 @@ namespace InventarioAPI.Dominio.Services.Clientes
             ClienteEntity clienteEntity = _clienteRepository.GetById(cliente.id_cliente);
             if (clienteEntity != null)
             {
-                clienteEntity = _clienteRepository.Update(_mapper.Map<ClienteEntity>(cliente));
+                ClienteEntity clientToInsert = _mapper.Map<ClienteEntity>(cliente);
+                clientToInsert.contrasena_encriptada = clienteEntity.contrasena_encriptada;
+                clientToInsert.salt = clienteEntity.salt;
+                clientToInsert = _clienteRepository.Update(clientToInsert);
             }
             return _mapper.Map<ClienteContract>(clienteEntity);
         }

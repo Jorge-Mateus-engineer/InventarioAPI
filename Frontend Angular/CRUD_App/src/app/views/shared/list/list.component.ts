@@ -13,6 +13,7 @@ import {
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnChanges {
+  /*Getting Data fro parent component */
   /**
    *Array of models used to populate table rows
    *
@@ -35,6 +36,7 @@ export class ListComponent implements OnChanges {
    */
   displayedColumns: string[] = [];
 
+  /*Sending data to parent component */
   @Output() emitModelToEdit = new EventEmitter<any>();
   @Output() emitModelToDelete = new EventEmitter<any>();
 
@@ -51,7 +53,6 @@ export class ListComponent implements OnChanges {
       this.displayedColumns = this.headersAndPropList.map(
         (prop) => prop.property
       );
-
       this.displayedColumns.push('acciones');
     }
   }

@@ -8,7 +8,7 @@
         public string primer_apellido { get; set; }
         public string segundo_apellido { get; set; }
         public string correo { get; set; }
-        public string contrasena { get; set; }
+        public string? contrasena {  get; set; }
         public string telefono { get; set; }
     }
 }

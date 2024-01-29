@@ -1,1 +1,18 @@
-<p>update works!</p>
+<div class="form-container">
+  <h2>Edit the selected Entry</h2>
+  <form #editForm="ngForm" class="update-form">
+    <mat-form-field
+      class="update-input"
+      *ngFor="let item of headersAndProperties"
+    >
+      <mat-label>{{ item.header }}</mat-label>
+      <input
+        matInput
+        placeholder="{{ item.header }}"
+        [(ngModel)]="modelToEdit[item.property]"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="saveForm()">Save</button>
+  </form>
+</div>

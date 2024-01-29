@@ -1,7 +1,16 @@
 <app-list
   [modelsList]="models"
   [headersAndPropList]="headersAndProperties"
-  (emitModelToEdit)="setClientEdit($event)"
-  (emitModelToDelete)="setClientToDelete($event)"
+  (emitModelToEdit)="clientToEdit = $event"
+  (emitModelToDelete)="clientToDelete = $event"
 ></app-list>
-<app-update></app-update>
+<br />
+<br />
+<div *ngIf="clientToEdit.id_cliente != 0">
+  <app-update
+    [modelToEdit]="clientToEdit"
+    [headersAndProperties]="headersAndProperties"
+    (emitModelToEdit)="clientToEdit = $event"
+    (emitEdit)="saveEditedClient($event)"
+  ></app-update>
+</div>
