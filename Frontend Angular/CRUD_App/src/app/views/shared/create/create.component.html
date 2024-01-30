@@ -1,1 +1,20 @@
-<p>create works!</p>
+<div class="overlay">
+  <div class="background"></div>
+  <div class="container">
+    <form #createForm="ngForm">
+      <mat-form-field *ngFor="let item of headersAndPropList">
+        <mat-label>{{ item.header }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ item.header }}"
+          [(ngModel)]="modelToCreate[item.property]"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="confirmCreation()">
+        Crear
+      </button>
+      <mat-icon class="close-icon" (click)="closeOverlay()">close</mat-icon>
+    </form>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UpdateComponent } from './update/update.component';
 import { ReadComponent } from './read/read.component';
 import { DeleteComponent } from './delete/delete.component';
+import { CreateComponent } from './create/create.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     UpdateComponent,
     ReadComponent,
     DeleteComponent,
+    CreateComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { MatIconModule } from '@angular/material/icon';
     UpdateComponent,
     ReadComponent,
     DeleteComponent,
+    CreateComponent,
     MatTableModule,
     MatSortModule,
     FormsModule,

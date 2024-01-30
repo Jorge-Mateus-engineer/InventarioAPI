@@ -32,5 +32,6 @@ export class DeleteComponent {
     this.emitDeleteConfirmation.emit(true);
     this.closeOverlay();
     this.router.navigateByUrl(this.router.url);
+    window.location.reload();
   }
 }

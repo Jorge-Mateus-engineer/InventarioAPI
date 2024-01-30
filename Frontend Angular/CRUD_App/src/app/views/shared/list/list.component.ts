@@ -13,7 +13,7 @@ import {
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnChanges {
-  /*Getting Data fro parent component */
+  /*Getting Data from parent component */
   /**
    *Array of models used to populate table rows
    *
@@ -41,6 +41,7 @@ export class ListComponent implements OnChanges {
   @Output() emitModelToDelete = new EventEmitter<any>();
   @Output() emitEditOverlay = new EventEmitter<boolean>();
   @Output() emitDeleteOverlay = new EventEmitter<boolean>();
+  @Output() emitCreateOverlay = new EventEmitter<boolean>();
 
   sendToParentForEdit(model: any): void {
     this.emitModelToEdit.emit(model);
@@ -50,6 +51,10 @@ export class ListComponent implements OnChanges {
   sendToParenForDeleting(model: any): void {
     this.emitModelToDelete.emit(model);
     this.emitDeleteOverlay.emit(true);
+  }
+
+  openCreateOverlay(): void {
+    this.emitCreateOverlay.emit(true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -23,12 +23,19 @@ export class ClientesComponent implements OnInit {
    */
   clientToEdit: ClienteModel = new ClienteModel();
   /**
-   *Model of the client that will be deleted on the database
+   *Model of the client that will be deleted from the database
    *
    * @type {ClienteModel}
    * @memberof ClientesComponent
    */
   clientToDelete: ClienteModel = new ClienteModel();
+  /**
+   *Model of the client that will be inserted into the database
+   *
+   * @type {ClienteModel}
+   * @memberof ClientesComponent
+   */
+  clientToCreate: ClienteModel = new ClienteModel();
   /**
    * Array of objects of the schema { header: 'string' , property: 'string'}
    * used to populate column tittles/form labels and acces the model's preperty using array notation model[property]
@@ -47,6 +54,7 @@ export class ClientesComponent implements OnInit {
 
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
+  showCreateOverlay: boolean = false;
 
   constructor(private clienteService: ClientesService) {}
 
@@ -73,6 +81,15 @@ export class ClientesComponent implements OnInit {
     if (confirmation) {
       this.clienteService
         .deleteClient(this.clientToDelete.id_cliente)
+        .subscribe((val) => console.log(val));
+    }
+  }
+
+  createClient(confirmation: boolean): void {
+    debugger;
+    if (confirmation) {
+      this.clienteService
+        .createClient(this.clientToCreate)
         .subscribe((val) => console.log(val));
     }
   }

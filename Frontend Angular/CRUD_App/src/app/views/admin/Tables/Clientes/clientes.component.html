@@ -5,6 +5,7 @@
   (emitModelToDelete)="clientToDelete = $event"
   (emitEditOverlay)="showEditOverlay = $event"
   (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
 ></app-list>
 <br />
 <br />
@@ -24,4 +25,14 @@
     (emitDeleteConfirmation)="deleteSelectedClient($event)"
     (emitCloseOverlay)="showDeleteOverlay = $event"
   ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="clientToCreate"
+    [headersAndPropList]="headersAndProperties.slice(1)"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createClient($event)"
+    (emitModel)="clientToCreate = $event"
+  ></app-create>
+  <p>{{ clientToCreate.primer_nombre }}</p>
 </div>
