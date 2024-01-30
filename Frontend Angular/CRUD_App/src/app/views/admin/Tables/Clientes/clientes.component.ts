@@ -45,6 +45,8 @@ export class ClientesComponent implements OnInit {
     { header: 'Telefono', property: 'telefono' },
   ];
 
+  showEditOverlay: boolean = false;
+
   constructor(private clienteService: ClientesService) {}
 
   list(): void {

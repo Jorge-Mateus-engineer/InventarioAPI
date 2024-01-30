@@ -39,9 +39,11 @@ export class ListComponent implements OnChanges {
   /*Sending data to parent component */
   @Output() emitModelToEdit = new EventEmitter<any>();
   @Output() emitModelToDelete = new EventEmitter<any>();
+  @Output() emitEditOverlay = new EventEmitter<boolean>();
 
   sendToParentForEdit(model: any): void {
     this.emitModelToEdit.emit(model);
+    this.emitEditOverlay.emit(true);
   }
 
   sendToParenForDeleting(model: any): void {

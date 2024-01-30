@@ -3,14 +3,16 @@
   [headersAndPropList]="headersAndProperties"
   (emitModelToEdit)="clientToEdit = $event"
   (emitModelToDelete)="clientToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
 ></app-list>
 <br />
 <br />
-<div *ngIf="clientToEdit.id_cliente != 0">
+<div *ngIf="showEditOverlay">
   <app-update
     [modelToEdit]="clientToEdit"
     [headersAndProperties]="headersAndProperties"
     (emitModelToEdit)="clientToEdit = $event"
     (emitEdit)="saveEditedClient($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
   ></app-update>
 </div>

@@ -1,10 +1,30 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  filter: blur(5px) opacity(0.9);
+  z-index: -1;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 50rem;
-  border: 1px solid red;
-  position: absolute;
+  border: 1px solid black;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -12,11 +32,12 @@
   height: 50rem;
   text-align: center;
   padding: 5rem;
-  background-color: aqua;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .update-form {
-  z-index: 1;
+  z-index: 2;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -24,4 +45,14 @@
 
 .update-input {
   height: 8rem;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}
+
+.close-icon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
 }
