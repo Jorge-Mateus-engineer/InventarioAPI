@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update',
@@ -8,13 +17,24 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     '(document:keydown.escape)': 'handleKeyboardEvent($event)',
   },
 })
-export class UpdateComponent {
+export class UpdateComponent implements OnInit {
   @Input() headersAndProperties: any[] = [];
   @Input() modelToEdit: any;
 
   @Output() emitModelToEdit = new EventEmitter<any>();
-  @Output() emitEdit = new EventEmitter<boolean>();
+  @Output() emitEditConfirmation = new EventEmitter<boolean>();
   @Output() emitCloseOverlay = new EventEmitter<boolean>();
+
+  originalModel: any;
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Initialize originalModel when modelToEdit is available
+    if (this.modelToEdit) {
+      this.originalModel = { ...this.modelToEdit };
+    }
+  }
 
   closeOverlay(): void {
     this.emitCloseOverlay.emit(false);
@@ -26,6 +46,8 @@ export class UpdateComponent {
 
   saveForm(): void {
     this.emitModelToEdit.emit(this.modelToEdit);
-    this.emitEdit.emit(true);
+    this.emitEditConfirmation.emit(true);
+    this.closeOverlay();
+    this.router.navigateByUrl(this.router.url);
   }
 }

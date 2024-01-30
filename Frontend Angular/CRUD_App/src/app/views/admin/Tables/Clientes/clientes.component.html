@@ -4,6 +4,7 @@
   (emitModelToEdit)="clientToEdit = $event"
   (emitModelToDelete)="clientToDelete = $event"
   (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
 ></app-list>
 <br />
 <br />
@@ -12,7 +13,15 @@
     [modelToEdit]="clientToEdit"
     [headersAndProperties]="headersAndProperties"
     (emitModelToEdit)="clientToEdit = $event"
-    (emitEdit)="saveEditedClient($event)"
+    (emitEditConfirmation)="saveEditedClient($event)"
     (emitCloseOverlay)="showEditOverlay = $event"
   ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="clientToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteSelectedClient($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
 </div>

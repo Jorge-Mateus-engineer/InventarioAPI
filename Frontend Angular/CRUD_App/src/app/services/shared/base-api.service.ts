@@ -132,7 +132,7 @@ export class BaseAPIService {
       this.addAutorization();
     }
     return this._httpClient.delete<Tmodel>(
-      `${this.API_ROOT}${endPoint}/${id}`,
+      `${this.API_ROOT}${endPoint}?id=${id}`,
       {
         headers: this.headers,
       }

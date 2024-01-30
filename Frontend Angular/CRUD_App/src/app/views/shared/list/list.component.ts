@@ -40,6 +40,7 @@ export class ListComponent implements OnChanges {
   @Output() emitModelToEdit = new EventEmitter<any>();
   @Output() emitModelToDelete = new EventEmitter<any>();
   @Output() emitEditOverlay = new EventEmitter<boolean>();
+  @Output() emitDeleteOverlay = new EventEmitter<boolean>();
 
   sendToParentForEdit(model: any): void {
     this.emitModelToEdit.emit(model);
@@ -48,6 +49,7 @@ export class ListComponent implements OnChanges {
 
   sendToParenForDeleting(model: any): void {
     this.emitModelToDelete.emit(model);
+    this.emitDeleteOverlay.emit(true);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

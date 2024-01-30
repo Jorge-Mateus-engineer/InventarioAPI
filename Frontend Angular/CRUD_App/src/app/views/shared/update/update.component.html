@@ -5,7 +5,7 @@
     <form #editForm="ngForm" class="update-form">
       <mat-form-field
         class="update-input"
-        *ngFor="let item of headersAndProperties"
+        *ngFor="let item of headersAndProperties; let i = index"
       >
         <mat-label>{{ item.header }}</mat-label>
         <input
@@ -13,6 +13,7 @@
           placeholder="{{ item.header }}"
           [(ngModel)]="modelToEdit[item.property]"
           [ngModelOptions]="{ standalone: true }"
+          [attr.readonly]="i === 0 ? true : null"
         />
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="saveForm()">

@@ -46,6 +46,7 @@ export class ClientesComponent implements OnInit {
   ];
 
   showEditOverlay: boolean = false;
+  showDeleteOverlay: boolean = false;
 
   constructor(private clienteService: ClientesService) {}
 
@@ -64,6 +65,14 @@ export class ClientesComponent implements OnInit {
     if (confirmation) {
       this.clienteService
         .updateClient(this.clientToEdit)
+        .subscribe((val) => console.log(val));
+    }
+  }
+
+  deleteSelectedClient(confirmation: boolean): void {
+    if (confirmation) {
+      this.clienteService
+        .deleteClient(this.clientToDelete.id_cliente)
         .subscribe((val) => console.log(val));
     }
   }

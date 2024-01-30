@@ -1,1 +1,23 @@
-<p>delete works!</p>
+<div class="overlay">
+  <div class="background" (click)="closeOverlay()"></div>
+  <div class="container">
+    <div class="tittle">
+      Confirme que desea eliminar la entrada seleccionada
+    </div>
+    <div class="modelo" *ngFor="let item of headersAndProperties">
+      <span
+        ><strong>{{ item.header }}:</strong></span
+      >
+      <span>{{ modelToDelete[item.property] }}</span>
+    </div>
+    <div class="botones">
+      <button mat-raised-button color="warn" (click)="confirmDelete()">
+        Eliminar
+      </button>
+      <button mat-raised-button color="accent" (click)="closeOverlay()">
+        Cancelar
+      </button>
+    </div>
+    <mat-icon class="close-icon" (click)="closeOverlay()">close</mat-icon>
+  </div>
+</div>

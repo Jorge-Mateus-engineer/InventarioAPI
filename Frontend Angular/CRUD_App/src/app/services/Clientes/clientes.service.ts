@@ -35,11 +35,11 @@ export class ClientesService extends BaseAPIService {
     ).pipe(map((res) => res));
   }
 
-  deleteClient(clientId: Number): void {
-    this.delete<ClienteModel>(
+  deleteClient(clientId: Number): Observable<ClienteModel> {
+    return this.delete<ClienteModel>(
       `${this.baseEndpoint}/DeleteClient`,
       clientId,
       true
-    );
+    ).pipe(map((res) => res));
   }
 }
