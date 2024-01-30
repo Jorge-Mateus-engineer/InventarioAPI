@@ -62,13 +62,13 @@ namespace InventarioAPI.Controllers
         [HttpDelete]
         [Route("[Action]")]
         [Authorize]
-        public IActionResult Delete(CategoriaContract categoria)
+        public IActionResult Delete(int id )
         {
-            CategoriaContract categoriaContract = _categoriaService.GetByName(categoria.nombre);
-            if (categoriaContract != null)
+            CategoriaContract categoryToDelete = _categoriaService.GetById(id);
+            if (categoryToDelete != null)
             {
-                _categoriaService.Delete(categoriaContract);
-                return Ok(categoriaContract);
+                _categoriaService.Delete(categoryToDelete);
+                return NoContent();
             }
             else
             {

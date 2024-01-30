@@ -6,6 +6,7 @@ namespace InventarioAPI.Infraestructura.Repositorios.Categorias
     {
         List<CategoriaEntity> GetAll();
         CategoriaEntity GetByName(string name);
+        CategoriaEntity GetById(int id);
         CategoriaEntity Insert(CategoriaEntity entity);
         CategoriaEntity Update(CategoriaEntity entity);
         void Delete(CategoriaEntity entity);

@@ -28,6 +28,11 @@ namespace InventarioAPI.Infraestructura.Repositorios.Categorias
             return _context.Categorias.Where(c => c.nombre == name).Single();
         }
 
+        public CategoriaEntity GetById(int id)
+        {
+            return _context.Categorias.Where(c => c.id_categoria == id).Single();
+        }
+
         public CategoriaEntity Insert(CategoriaEntity entity)
         {
             _context.Categorias.Add(entity);

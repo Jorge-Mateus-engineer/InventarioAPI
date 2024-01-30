@@ -31,6 +31,11 @@ namespace InventarioAPI.Dominio.Services.DetalleCompras
             return _mapper.Map<List<DetalleCompraContract>>(_detalleCompraRepository.GetByPurchaseId(purchaseId));
         }
 
+        public DetalleCompraContract GetById(int id)
+        {
+            return _mapper.Map<DetalleCompraContract>(_detalleCompraRepository.GetById(id));
+        }
+
         public DetalleCompraContract Insert(DetalleCompraContract contract)
         {
             DetalleCompraEntity detalle = _mapper.Map<DetalleCompraEntity>(contract);

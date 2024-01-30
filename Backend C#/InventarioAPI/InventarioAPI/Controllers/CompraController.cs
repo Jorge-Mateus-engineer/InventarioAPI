@@ -78,9 +78,9 @@ namespace InventarioAPI.Controllers
         [HttpDelete]
         [Route("[Action]")]
         [Authorize]
-        public IActionResult Delete(CompraContract compra)
+        public IActionResult Delete(int id)
         {
-            CompraContract compraContract = _comprasService.GetById(compra.id_compra);
+            CompraContract compraContract = _comprasService.GetById(id);
             if (compraContract != null)
             {
                 _comprasService.Delete(compraContract);

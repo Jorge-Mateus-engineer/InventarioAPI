@@ -35,6 +35,11 @@ namespace InventarioAPI.Dominio.Services.Categorias
             return _mapper.Map<CategoriaContract>(_categoriasRepository.GetByName(name));
         }
 
+        public CategoriaContract GetById(int id)
+        {
+            return _mapper.Map<CategoriaContract>(_categoriasRepository.GetById(id));
+        }
+
         public CategoriaContract Insert(CategoriaContract entity)
         {
             throw new NotImplementedException();

@@ -6,6 +6,7 @@ namespace InventarioAPI.Dominio.Services.DetalleCompras
     {
         List<DetalleCompraContract> GetAll();
         List<DetalleCompraContract> GetByPurchaseId(int purchaseId);
+        DetalleCompraContract GetById(int id);
         DetalleCompraContract Insert(DetalleCompraContract contract);
         DetalleCompraContract Update(DetalleCompraContract contract);
         void Delete(DetalleCompraContract contract);

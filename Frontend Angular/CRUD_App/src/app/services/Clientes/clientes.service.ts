@@ -18,13 +18,11 @@ export class ClientesService extends BaseAPIService {
       `${this.baseEndpoint}/SignUp`,
       clienteModel,
       false
-    ).pipe(map((res) => res));
+    );
   }
 
   listClients(): Observable<Array<ClienteModel>> {
-    return this.get<Array<ClienteModel>>('api/Cliente', '', true).pipe(
-      map((res) => res)
-    );
+    return this.get<Array<ClienteModel>>(`${this.baseEndpoint}`, '', true);
   }
 
   updateClient(clienteModel: ClienteModel): Observable<ClienteModel> {
@@ -32,7 +30,7 @@ export class ClientesService extends BaseAPIService {
       `${this.baseEndpoint}/UpdateClient`,
       clienteModel,
       true
-    ).pipe(map((res) => res));
+    );
   }
 
   deleteClient(clientId: Number): Observable<ClienteModel> {
@@ -40,6 +38,6 @@ export class ClientesService extends BaseAPIService {
       `${this.baseEndpoint}/DeleteClient`,
       clientId,
       true
-    ).pipe(map((res) => res));
+    );
   }
 }

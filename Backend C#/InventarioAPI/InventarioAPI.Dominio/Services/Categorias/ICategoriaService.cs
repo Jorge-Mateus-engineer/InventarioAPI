@@ -6,6 +6,7 @@ namespace InventarioAPI.Dominio.Services.Categorias
     {
         List<CategoriaContract> GetAll();
         CategoriaContract GetByName(string name);
+        CategoriaContract GetById(int id);
         CategoriaContract Insert(CategoriaContract entity);
         CategoriaContract Update(CategoriaContract entity);
         void Delete(CategoriaContract entity);

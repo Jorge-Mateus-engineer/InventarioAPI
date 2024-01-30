@@ -46,7 +46,7 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Update(DetalleCompraContract detalle)
         {
-            DetalleCompraContract detalleContract = _detalleComprasSerivce.GetAll().Where(d => d.id_detalle_compra == detalle.id_detalle_compra).FirstOrDefault();
+            DetalleCompraContract detalleContract = _detalleComprasSerivce.GetById(detalle.id_detalle_compra);
             if (detalleContract != null)
             {
                 _detalleComprasSerivce.Update(detalle);
@@ -61,10 +61,19 @@ namespace InventarioAPI.Controllers
         [HttpDelete]
         [Route("[Action]")]
         [Authorize]
-        public IActionResult Delete(DetalleCompraContract detalle)
+        public IActionResult Delete(int id)
         {
-            _detalleComprasSerivce.Update(detalle);
-            return Ok(detalle);
+            DetalleCompraContract detalle = _detalleComprasSerivce.GetById(id);
+            if (detalle != null)
+            {
+                _detalleComprasSerivce.Update(detalle);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
     }
 }
