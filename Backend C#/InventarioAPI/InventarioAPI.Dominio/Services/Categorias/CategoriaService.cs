@@ -18,10 +18,10 @@ namespace InventarioAPI.Dominio.Services.Categorias
 
         public void Delete(CategoriaContract entity)
         {
-            CategoriaEntity categoria = _categoriasRepository.GetByName(entity.nombre.ToLower());
-            if (categoria != null)
+            CategoriaEntity categoriaToDelete = _categoriasRepository.GetById(entity.id_categoria);
+            if (categoriaToDelete != null)
             {
-                _categoriasRepository.Delete(categoria);
+                _categoriasRepository.Delete(categoriaToDelete);
             }
         }
 
@@ -40,14 +40,18 @@ namespace InventarioAPI.Dominio.Services.Categorias
             return _mapper.Map<CategoriaContract>(_categoriasRepository.GetById(id));
         }
 
-        public CategoriaContract Insert(CategoriaContract entity)
+        public CategoriaContract Insert(CategoriaContract contract)
         {
-            throw new NotImplementedException();
+            CategoriaEntity categoriaEntity = _mapper.Map<CategoriaEntity>(contract);
+            _categoriasRepository.Insert(categoriaEntity);
+            return contract;
         }
 
-        public CategoriaContract Update(CategoriaContract entity)
+        public CategoriaContract Update(CategoriaContract contract)
         {
-            throw new NotImplementedException();
+            CategoriaEntity categoriaEntity = _mapper.Map<CategoriaEntity>(contract);
+            _categoriasRepository.Update(categoriaEntity);
+            return contract;
         }
     }
 }

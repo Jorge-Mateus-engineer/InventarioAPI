@@ -1,2 +1,35 @@
-<p>categorias works!</p>
-<app-list></app-list>
+<app-list
+  [modelsList]="models"
+  [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="categoriaToEdit = $event"
+  (emitModelToDelete)="categoriaToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
+></app-list>
+<div *ngIf="showEditOverlay">
+  <app-update
+    [modelToEdit]="categoriaToEdit"
+    [headersAndProperties]="headersAndProperties.slice(1)"
+    (emitModelToEdit)="categoriaToEdit = $event"
+    (emitEditConfirmation)="saveEditedCategoria($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
+  ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="categoriaToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteCategoria($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="categoriaToCreate"
+    [headersAndPropList]="headersAndProperties.slice(1)"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createCategoria($event)"
+    (emitModel)="categoriaToCreate = $event"
+  ></app-create>
+</div>

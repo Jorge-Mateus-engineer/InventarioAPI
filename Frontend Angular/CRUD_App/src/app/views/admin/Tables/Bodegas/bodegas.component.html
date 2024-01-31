@@ -1,2 +1,35 @@
-<p>bodegas works!x</p>
-<app-list></app-list>
+<app-list
+  [modelsList]="models"
+  [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="bodegaToEdit = $event"
+  (emitModelToDelete)="bodegaToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
+></app-list>
+<div *ngIf="showEditOverlay">
+  <app-update
+    [modelToEdit]="bodegaToEdit"
+    [headersAndProperties]="headersAndProperties.slice(1)"
+    (emitModelToEdit)="bodegaToEdit = $event"
+    (emitEditConfirmation)="saveEditedBodega($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
+  ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="bodegaToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteBodega($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="bodegaToCreate"
+    [headersAndPropList]="headersAndProperties.slice(1)"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createBodega($event)"
+    (emitModel)="bodegaToCreate = $event"
+  ></app-create>
+</div>

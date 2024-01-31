@@ -7,12 +7,10 @@
   (emitDeleteOverlay)="showDeleteOverlay = $event"
   (emitCreateOverlay)="showCreateOverlay = $event"
 ></app-list>
-<br />
-<br />
 <div *ngIf="showEditOverlay">
   <app-update
     [modelToEdit]="clientToEdit"
-    [headersAndProperties]="headersAndProperties"
+    [headersAndProperties]="headersAndProperties.slice(1)"
     (emitModelToEdit)="clientToEdit = $event"
     (emitEditConfirmation)="saveEditedClient($event)"
     (emitCloseOverlay)="showEditOverlay = $event"
@@ -34,5 +32,4 @@
     (emitConfirmation)="createClient($event)"
     (emitModel)="clientToCreate = $event"
   ></app-create>
-  <p>{{ clientToCreate.primer_nombre }}</p>
 </div>
