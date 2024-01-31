@@ -1,4 +1,5 @@
 ﻿using InventarioAPI.Comunes.Clases.Contratos;
+using InventarioAPI.Dominio.Services.Clientes;
 using InventarioAPI.Dominio.Services.Compras;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace InventarioAPI.Controllers
     {
 
         private readonly IComprasService _comprasService;
+        private readonly IClientesService _clientesService;
 
-        public CompraController(IComprasService comprasService)
+        public CompraController(IComprasService comprasService, IClientesService clientesService)
         {
             _comprasService = comprasService;
+            _clientesService = clientesService;
         }
 
         [HttpGet]
@@ -54,8 +57,16 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Create(CompraContract compra)
         {
-            _comprasService.Insert(compra);
-            return Ok(compra);
+            ClienteContract associatedClient = _clientesService.GetById(compra.id_cliente);
+            if (associatedClient != null)
+            {
+                _comprasService.Insert(compra);
+                return Ok(compra);
+            }
+            else
+            {
+                return NotFound($"El cliente de ID: {compra.id_cliente} no existe");
+            }
         }
 
         [HttpPatch]

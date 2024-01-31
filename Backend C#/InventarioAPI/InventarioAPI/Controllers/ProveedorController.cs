@@ -54,7 +54,7 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Update(ProveedorContract proveedor)
         {
-            _proveedorService.Delete(proveedor);
+            _proveedorService.Update(proveedor);
             return Ok(proveedor);
         }
 
