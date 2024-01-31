@@ -1,5 +1,7 @@
 ﻿using InventarioAPI.Comunes.Clases.Contratos;
+using InventarioAPI.Dominio.Services.Compras;
 using InventarioAPI.Dominio.Services.DetalleCompras;
+using InventarioAPI.Dominio.Services.Productos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,14 @@ namespace InventarioAPI.Controllers
     public class DetalleCompraController : Controller
     {
         private readonly IDetalleComprasService _detalleComprasSerivce;
+        private readonly IComprasService _comprasSerivce;
+        private readonly IProductosService _productosService;
 
-        public DetalleCompraController(IDetalleComprasService detalleComprasService)
+        public DetalleCompraController(IDetalleComprasService detalleComprasService, IComprasService comprasService, IProductosService productosService)
         {
             _detalleComprasSerivce = detalleComprasService;
+            _comprasSerivce = comprasService;
+            _productosService = productosService;
         }
 
         [HttpGet]
@@ -37,8 +43,28 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Create(DetalleCompraContract detalle)
         {
-            _detalleComprasSerivce.Insert(detalle);
-            return Ok(detalle);
+            CompraContract compraAsociada = _comprasSerivce.GetById(detalle.id_compra);
+            ProductoContract productoAsociado = _productosService.GetById(detalle.id_producto);
+            if (compraAsociada != null)
+            {
+                if (productoAsociado != null)
+                {
+                    Decimal totalDetalle = (Decimal) (detalle.cantidad * productoAsociado.precio_unitario);
+                    compraAsociada.valor_total += totalDetalle;
+                    _comprasSerivce.Update(compraAsociada);
+                    detalle.total_detalle = (float) totalDetalle;
+                    _detalleComprasSerivce.Insert(detalle);
+                    return Ok(detalle);
+                }
+                else
+                {
+                    return BadRequest($"El producto con ID: {detalle.id_producto} no existe");
+                }
+            }
+            else
+            {
+                return NotFound($"La compra con ID: {detalle.id_compra} no existe");
+            }
         }
 
         [HttpPatch]
@@ -46,16 +72,40 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Update(DetalleCompraContract detalle)
         {
-            DetalleCompraContract detalleContract = _detalleComprasSerivce.GetById(detalle.id_detalle_compra);
-            if (detalleContract != null)
+            CompraContract compraAsociada = _comprasSerivce.GetById(detalle.id_compra);
+            ProductoContract productoAsociado = _productosService.GetById(detalle.id_producto);
+            DetalleCompraContract detalleAnterior = _detalleComprasSerivce.GetById(detalle.id_detalle_compra);
+            if (compraAsociada != null)
             {
-                _detalleComprasSerivce.Update(detalle);
-                return Ok(detalle);
+                if (productoAsociado != null)
+                {
+                    //Get old total from associated detail
+                    Decimal totalDetalleAnterior = (Decimal) detalleAnterior.total_detalle;
+
+                    //Recalculate the total for the detail to update
+                    Decimal totalDetalleActual = (Decimal)(detalle.cantidad * productoAsociado.precio_unitario);
+
+                    //Update the total of the associated purchase
+                    //1. Remove old detail value from purchase total
+                    compraAsociada.valor_total -= totalDetalleAnterior;
+                    //2. Add new total of the detail
+                    compraAsociada.valor_total += totalDetalleActual;
+                    //3. Update totals using the service
+                    _comprasSerivce.Update(compraAsociada);
+                    detalle.total_detalle = (float)totalDetalleActual;
+                    _detalleComprasSerivce.Update(detalle);
+                    return Ok(detalle);
+                }
+                else
+                {
+                    return BadRequest($"El producto con ID: {detalle.id_producto} no existe");
+                }
             }
             else
             {
-                return NotFound();
+                return NotFound($"La compra con ID: {detalle.id_compra} no existe");
             }
+
         }
 
         [HttpDelete]
@@ -66,7 +116,7 @@ namespace InventarioAPI.Controllers
             DetalleCompraContract detalle = _detalleComprasSerivce.GetById(id);
             if (detalle != null)
             {
-                _detalleComprasSerivce.Update(detalle);
+                _detalleComprasSerivce.Delete(detalle);
                 return NoContent();
             }
             else

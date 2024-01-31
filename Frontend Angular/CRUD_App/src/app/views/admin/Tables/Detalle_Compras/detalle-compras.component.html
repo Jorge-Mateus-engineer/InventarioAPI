@@ -1,2 +1,35 @@
-<p>detalle-compras works!</p>
-<app-list></app-list>
+<app-list
+  [modelsList]="models"
+  [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="detalleToEdit = $event"
+  (emitModelToDelete)="detalleToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
+></app-list>
+<div *ngIf="showEditOverlay">
+  <app-update
+    [modelToEdit]="detalleToEdit"
+    [headersAndProperties]="headersAndProperties.slice(1)"
+    (emitModelToEdit)="detalleToEdit = $event"
+    (emitEditConfirmation)="saveEditedDetalle($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
+  ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="detalleToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteDetalle($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="detalleToCreate"
+    [headersAndPropList]="headersAndProperties.slice(1)"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createDetalle($event)"
+    (emitModel)="detalleToCreate = $event"
+  ></app-create>
+</div>

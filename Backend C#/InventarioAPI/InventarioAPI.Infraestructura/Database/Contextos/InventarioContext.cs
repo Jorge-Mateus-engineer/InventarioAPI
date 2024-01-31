@@ -30,6 +30,14 @@ namespace InventarioAPI.Infraestructura.Database.Contextos
             modelBuilder.Entity<CompraEntity>()
                 .Property(c => c.valor_total)
                 .HasColumnType("decimal(30, 2)");
+
+            modelBuilder.Entity<ProductoEntity>()
+                .Property(c => c.precio_unitario)
+                .HasColumnType("decimal(10, 2)");
+
+            modelBuilder.Entity<DetalleCompraEntity>()
+                .Property(c => c.total_detalle)
+                .HasColumnType("decimal(10, 2)");
             // Configure the keyless entity
             modelBuilder.Entity<DisponibilidadEntity>().HasNoKey();
         }
