@@ -33,6 +33,11 @@ namespace InventarioAPI.Infraestructura.Repositorios.Proveedores
             return _context.Proveedores.Where(p => p.email.ToLower() == email.ToLower()).Single();
         }
 
+        ProveedorEntity GetById(int id)
+        {
+            return _context.Proveedores.Where(p => p.id_proveedor == id).SingleOrDefault();
+        }
+
         public ProveedorEntity Insert(ProveedorEntity entity)
         {
             _context.Proveedores.Add(entity);

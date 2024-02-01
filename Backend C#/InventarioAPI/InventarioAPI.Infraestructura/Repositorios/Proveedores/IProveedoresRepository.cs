@@ -7,6 +7,7 @@ namespace InventarioAPI.Infraestructura.Repositorios.Proveedores
         List<ProveedorEntity> GetAll();
         List<ProveedorEntity> GetByCompany(string companyName);
         ProveedorEntity GetByEmail(string email);
+        ProveedorEntity GetById(int id);
         ProveedorEntity Insert(ProveedorEntity entity);
         ProveedorEntity Update(ProveedorEntity entity);
         void Delete(ProveedorEntity entity);

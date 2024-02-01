@@ -36,6 +36,11 @@ namespace InventarioAPI.Dominio.Services.Proveedores
             return _mapper.Map<ProveedorContract>(_proveedoresRepository.GetByEmail(email));
         }
 
+        ProveedorContract GetById(int id)
+        {
+            return _mapper.Map<ProveedorContract>(_proveedoresRepository.GetById(id));
+        }
+
         public ProveedorContract Insert(ProveedorContract contract)
         {
             ProveedorEntity proveedorEntity = _mapper.Map<ProveedorEntity>(contract);

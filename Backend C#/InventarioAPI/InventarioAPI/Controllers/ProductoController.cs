@@ -1,5 +1,7 @@
 ﻿using InventarioAPI.Comunes.Clases.Contratos;
+using InventarioAPI.Dominio.Services.Categorias;
 using InventarioAPI.Dominio.Services.Productos;
+using InventarioAPI.Dominio.Services.Proveedores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,14 @@ namespace InventarioAPI.Controllers
     public class ProductoController : Controller
     {
         private readonly IProductosService _productosService;
+        private readonly ICategoriaService _categoriaService;
+        private readonly IProveedorService _proveedorService;
 
-        public ProductoController(IProductosService productosService)
+        public ProductoController(IProductosService productosService, ICategoriaService categoriaService, IProveedorService proveedorService)
         {
             _productosService = productosService;
+            _categoriaService = categoriaService;
+            _proveedorService = proveedorService;
         }
 
         [HttpGet]
@@ -76,24 +82,49 @@ namespace InventarioAPI.Controllers
         [Authorize]
         public IActionResult Create(ProductoContract producto)
         {
-            _productosService.Insert(producto);
-            return Ok(producto);
+            CategoriaContract categoria = _categoriaService.GetById(producto.id_categoria);
+            ProveedorContract proveedorContract = _proveedorService.GetById(producto.id_proveedor);
+            if (categoria != null)
+            {
+                if (proveedorContract != null)
+                {
+                    _productosService.Insert(producto);
+                    return Ok(producto);
+                }
+                else
+                {
+                    return BadRequest($"El proveedor con ID: {producto.id_proveedor} no existe");
+                }
+            }
+            else
+            {
+                return BadRequest($"La categoria de ID: {producto.id_categoria} no existe");
+            }
         }
+
 
         [HttpPatch]
         [Route("[Action]")]
         [Authorize]
         public IActionResult Update(ProductoContract producto)
         {
-            ProductoContract productoContract = _productosService.GetByName(producto.nombre);
-            if (productoContract != null)
+            CategoriaContract categoria = _categoriaService.GetById(producto.id_categoria);
+            ProveedorContract proveedorContract = _proveedorService.GetById(producto.id_proveedor);
+            if (categoria != null)
             {
-                _productosService.Update(producto);
-                return Ok(producto);
+                if (proveedorContract != null)
+                {
+                    _productosService.Update(producto);
+                    return Ok(producto);
+                }
+                else
+                {
+                    return BadRequest($"El proveedor con ID: {producto.id_proveedor} no existe");
+                }
             }
             else
             {
-                return NotFound();
+                return BadRequest($"La categoria de ID: {producto.id_categoria} no existe");
             }
         }
 

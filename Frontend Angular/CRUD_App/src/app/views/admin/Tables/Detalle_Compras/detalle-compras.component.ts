@@ -28,12 +28,12 @@ export class DetalleComprasComponent implements OnInit {
       property: 'cantidad',
     },
     {
-      header: 'Total',
-      property: 'total_detalle',
-    },
-    {
       header: 'Id CompraAsociada',
       property: 'id_compra',
+    },
+    {
+      header: 'Total',
+      property: 'total_detalle',
     },
   ];
 

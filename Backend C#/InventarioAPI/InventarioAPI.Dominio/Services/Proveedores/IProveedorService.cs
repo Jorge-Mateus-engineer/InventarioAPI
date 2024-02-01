@@ -7,6 +7,7 @@ namespace InventarioAPI.Dominio.Services.Proveedores
         List<ProveedorContract> GetAll();
         List<ProveedorContract> GetByCompany(string companyName);
         ProveedorContract GetByEmail(string email);
+        ProveedorContract GetById(int id);
         ProveedorContract Insert(ProveedorContract contract);
         ProveedorContract Update(ProveedorContract contract);
         void Delete(ProveedorContract contract);

@@ -1,2 +1,35 @@
-<p>productos works!</p>
-<app-list></app-list>
+<app-list
+  [modelsList]="models"
+  [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="productToEdit = $event"
+  (emitModelToDelete)="productToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
+></app-list>
+<div *ngIf="showEditOverlay">
+  <app-update
+    [modelToEdit]="productToEdit"
+    [headersAndProperties]="headersAndProperties.slice(1)"
+    (emitModelToEdit)="productToEdit = $event"
+    (emitEditConfirmation)="saveEditedProducto($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
+  ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="productToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteProducto($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="productToCreate"
+    [headersAndPropList]="headersAndProperties.slice(1)"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createProducto($event)"
+    (emitModel)="productToCreate = $event"
+  ></app-create>
+</div>

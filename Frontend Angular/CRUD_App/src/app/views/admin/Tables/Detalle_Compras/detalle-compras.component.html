@@ -27,7 +27,7 @@
 <div *ngIf="showCreateOverlay">
   <app-create
     [modelToCreate]="detalleToCreate"
-    [headersAndPropList]="headersAndProperties.slice(1)"
+    [headersAndPropList]="headersAndProperties.slice(1, 4)"
     (emitCloseOverlay)="showCreateOverlay = $event"
     (emitConfirmation)="createDetalle($event)"
     (emitModel)="detalleToCreate = $event"
