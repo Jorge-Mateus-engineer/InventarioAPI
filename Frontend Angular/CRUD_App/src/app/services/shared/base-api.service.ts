@@ -138,4 +138,31 @@ export class BaseAPIService {
       }
     );
   }
+  /**
+   * Method created to delete items from a table that ahs a composite key
+   *
+   * @template Tmodel - Model corresponding to the table of the endpoint
+   * @param {string} endPoint - API endpoint string
+   * @param {Number} idProd - ID of the related product
+   * @param {Number} idBod - ID of the related wharehouse
+   * @param {boolean} [addAutorization] - Wheter to use JWT auth or not
+   * @return {*}  {Observable<Tmodel>} - Observable to handle response data
+   * @memberof BaseAPIService
+   */
+  public deleteDisp<Tmodel>(
+    endPoint: string,
+    idProd: Number,
+    idBod: Number,
+    addAuthorization?: boolean
+  ): Observable<Tmodel> {
+    if (addAuthorization) {
+      this.addAutorization();
+    }
+    return this._httpClient.delete<Tmodel>(
+      `${this.API_ROOT}${endPoint}?idProducto=${idProd}&idBodega=${idBod}`,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 }

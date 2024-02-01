@@ -17,9 +17,38 @@ export class DisponibilidadService extends BaseAPIService {
   createDisponibilidad(
     disponibilidadModel: DisponibilidadModel
   ): Observable<DisponibilidadModel> {
-    return this.patch<DisponibilidadModel>(
+    return this.post<DisponibilidadModel>(
       `${this.baseEndpoint}/Create`,
       disponibilidadModel,
+      true
+    );
+  }
+
+  getAllDisponibilidad(): Observable<Array<DisponibilidadModel>> {
+    return this.get<Array<DisponibilidadModel>>(
+      `${this.baseEndpoint}/GetAll`,
+      '',
+      false
+    );
+  }
+
+  updateDisponibilidad(
+    disponibilidadModel: DisponibilidadModel
+  ): Observable<DisponibilidadModel> {
+    return this.patch<DisponibilidadModel>(
+      `${this.baseEndpoint}/Update`,
+      disponibilidadModel,
+      true
+    );
+  }
+
+  deleteDisponibilidad(
+    disponibilidadModel: DisponibilidadModel
+  ): Observable<DisponibilidadModel> {
+    return this.deleteDisp<DisponibilidadModel>(
+      `${this.baseEndpoint}/Delete`,
+      disponibilidadModel.id_producto,
+      disponibilidadModel.id_bodega,
       true
     );
   }

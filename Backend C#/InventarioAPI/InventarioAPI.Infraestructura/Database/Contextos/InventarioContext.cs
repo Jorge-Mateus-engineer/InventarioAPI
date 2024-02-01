@@ -39,7 +39,18 @@ namespace InventarioAPI.Infraestructura.Database.Contextos
                 .Property(c => c.total_detalle)
                 .HasColumnType("decimal(10, 2)");
             // Configure the keyless entity
-            modelBuilder.Entity<DisponibilidadEntity>().HasNoKey();
+            modelBuilder.Entity<DisponibilidadEntity>()
+                .HasKey(d => new { d.id_producto, d.id_bodega });
+
+            modelBuilder.Entity<DisponibilidadEntity>()
+                .HasOne<ProductoEntity>()
+                .WithMany()
+                .HasForeignKey(d => d.id_producto);
+
+            modelBuilder.Entity<DisponibilidadEntity>()
+                .HasOne<BodegaEntity>()
+                .WithMany()
+                .HasForeignKey(d => d.id_bodega);
         }
     }
 }

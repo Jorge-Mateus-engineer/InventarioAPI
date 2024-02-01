@@ -69,12 +69,12 @@ namespace InventarioAPI.Controllers
         [HttpDelete]
         [Route("[Action]")]
         [Authorize]
-        public IActionResult Delete(DisponibilidadContract disponibilidad)
+        public IActionResult Delete(int idProducto, int idBodega )
         {
-            DisponibilidadContract disponibilidadContract = _disponibilidadService.GetByProductID(disponibilidad.id_producto).Where(d => d.id_bodega == disponibilidad.id_bodega).FirstOrDefault();
+            DisponibilidadContract disponibilidadContract = _disponibilidadService.GetAll().Where(d => d.id_producto == idProducto && d.id_bodega == idBodega).FirstOrDefault();
             if (disponibilidadContract != null)
             {
-                _disponibilidadService.Delete(disponibilidad);
+                _disponibilidadService.Delete(disponibilidadContract);
                 return NoContent();
             }
             else

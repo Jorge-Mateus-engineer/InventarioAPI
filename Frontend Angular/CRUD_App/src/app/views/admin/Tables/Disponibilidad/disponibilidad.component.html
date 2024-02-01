@@ -1,2 +1,35 @@
-<p>disponibilidad works!</p>
-<app-list></app-list>
+<app-list
+  [modelsList]="models"
+  [headersAndPropList]="headersAndProperties"
+  (emitModelToEdit)="disponibilidadToEdit = $event"
+  (emitModelToDelete)="disponibilidadToDelete = $event"
+  (emitEditOverlay)="showEditOverlay = $event"
+  (emitDeleteOverlay)="showDeleteOverlay = $event"
+  (emitCreateOverlay)="showCreateOverlay = $event"
+></app-list>
+<div *ngIf="showEditOverlay">
+  <app-update
+    [modelToEdit]="disponibilidadToEdit"
+    [headersAndProperties]="headersAndProperties.slice(1)"
+    (emitModelToEdit)="disponibilidadToEdit = $event"
+    (emitEditConfirmation)="saveEditedDisponibilidad($event)"
+    (emitCloseOverlay)="showEditOverlay = $event"
+  ></app-update>
+</div>
+<div *ngIf="showDeleteOverlay">
+  <app-delete
+    [modelToDelete]="disponibilidadToDelete"
+    [headersAndProperties]="headersAndProperties"
+    (emitDeleteConfirmation)="deleteDisponibilidad($event)"
+    (emitCloseOverlay)="showDeleteOverlay = $event"
+  ></app-delete>
+</div>
+<div *ngIf="showCreateOverlay">
+  <app-create
+    [modelToCreate]="disponibilidadToCreate"
+    [headersAndPropList]="headersAndProperties"
+    (emitCloseOverlay)="showCreateOverlay = $event"
+    (emitConfirmation)="createDisponibilidad($event)"
+    (emitModel)="disponibilidadToCreate = $event"
+  ></app-create>
+</div>
