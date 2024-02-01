@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CompraModel } from 'src/app/models/Compras/compra.model';
 import { ComprasService } from 'src/app/services/Compras/compras.service';
@@ -36,34 +37,53 @@ export class ComprasComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private compraService: ComprasService) {}
 
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
+
   list(): void {
-    this.compraService.listCompra().subscribe((c) => (this.models = c));
+    this.compraService.listCompra().subscribe(
+      (c) => (this.models = c),
+      (error) => this.handleError(error)
+    );
   }
 
   saveEditedCompra(confirmation: boolean): void {
     if (confirmation) {
-      this.compraService
-        .updateCompra(this.compraToEdit)
-        .subscribe((val) => console.log(val));
+      this.compraService.updateCompra(this.compraToEdit).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   createCompra(confirmation: boolean): void {
     if (confirmation) {
-      this.compraService
-        .createCompra(this.compraToCreate)
-        .subscribe((val) => console.log(val));
+      this.compraService.createCompra(this.compraToCreate).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   deleteCompra(confirmation: boolean): void {
     if (confirmation) {
-      this.compraService
-        .deleteCompra(this.compraToDelete)
-        .subscribe((val) => console.log(val));
+      this.compraService.deleteCompra(this.compraToDelete).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 

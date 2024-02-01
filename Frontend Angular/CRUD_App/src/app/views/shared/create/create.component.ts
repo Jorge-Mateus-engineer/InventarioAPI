@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +18,7 @@ export class CreateComponent {
     this.emitConfirmation.emit(true);
     this.emitModel.emit(this.modelToCreate);
     this.closeOverlay();
-    // setTimeout(() => window.location.reload(), 1000);
+    setTimeout(() => window.location.reload(), 1000);
   }
 
   closeOverlay(): void {

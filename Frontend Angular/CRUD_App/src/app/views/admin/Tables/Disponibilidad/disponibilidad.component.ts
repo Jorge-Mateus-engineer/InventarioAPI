@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DisponibilidadModel } from 'src/app/models/Disponibilidad/disponibilidad.model';
 import { DisponibilidadService } from 'src/app/services/Disponibilidad/disponibilidad.service';
@@ -36,20 +37,35 @@ export class DisponibilidadComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private disponibilidadService: DisponibilidadService) {}
 
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
+
   list(): void {
-    this.disponibilidadService
-      .getAllDisponibilidad()
-      .subscribe((d) => (this.models = d));
+    this.disponibilidadService.getAllDisponibilidad().subscribe(
+      (d) => (this.models = d),
+      (error) => this.handleError(error)
+    );
   }
 
   saveEditedDisponibilidad(confirmation: boolean): void {
     if (confirmation) {
       this.disponibilidadService
         .updateDisponibilidad(this.disponibilidadToEdit)
-        .subscribe((val) => console.log(val));
+        .subscribe({
+          error: (error) => {
+            this.handleError(error);
+          },
+        });
     }
   }
 
@@ -57,7 +73,11 @@ export class DisponibilidadComponent implements OnInit {
     if (confirmation) {
       this.disponibilidadService
         .createDisponibilidad(this.disponibilidadToCreate)
-        .subscribe((val) => console.log(val));
+        .subscribe({
+          error: (error) => {
+            this.handleError(error);
+          },
+        });
     }
   }
 
@@ -65,7 +85,11 @@ export class DisponibilidadComponent implements OnInit {
     if (confirmation) {
       this.disponibilidadService
         .deleteDisponibilidad(this.disponibilidadToDelete)
-        .subscribe((val) => console.log(val));
+        .subscribe({
+          error: (error) => {
+            this.handleError(error);
+          },
+        });
     }
   }
 

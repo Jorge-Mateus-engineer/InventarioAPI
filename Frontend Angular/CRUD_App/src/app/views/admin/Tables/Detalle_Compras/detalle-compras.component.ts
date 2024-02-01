@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DetalleCompraModel } from 'src/app/models/Detalle_Compras/detalleCompra.model';
 import { DetalleComprasService } from 'src/app/services/Detalle_compras/detalle-compras.service';
@@ -40,36 +41,53 @@ export class DetalleComprasComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private detalleComprasService: DetalleComprasService) {}
 
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
+
   list(): void {
-    this.detalleComprasService
-      .listDetalles()
-      .subscribe((d) => (this.models = d));
+    this.detalleComprasService.listDetalles().subscribe(
+      (d) => (this.models = d),
+      (error) => this.handleError(error)
+    );
   }
 
   saveEditedDetalle(confirmation: boolean): void {
     if (confirmation) {
-      this.detalleComprasService
-        .updateDetalle(this.detalleToEdit)
-        .subscribe((val) => console.log(val));
+      this.detalleComprasService.updateDetalle(this.detalleToEdit).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   createDetalle(confirmation: boolean): void {
     if (confirmation) {
-      this.detalleComprasService
-        .createDetalle(this.detalleToCreate)
-        .subscribe((val) => console.log(val));
+      this.detalleComprasService.createDetalle(this.detalleToCreate).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   deleteDetalle(confirmation: boolean): void {
     if (confirmation) {
-      this.detalleComprasService
-        .deleteDetalle(this.detalleToDelete)
-        .subscribe((val) => console.log(val));
+      this.detalleComprasService.deleteDetalle(this.detalleToDelete).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 

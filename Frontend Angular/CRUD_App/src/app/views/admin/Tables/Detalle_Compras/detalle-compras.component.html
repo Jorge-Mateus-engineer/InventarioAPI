@@ -33,3 +33,10 @@
     (emitModel)="detalleToCreate = $event"
   ></app-create>
 </div>
+<div *ngIf="showErrorOverlay">
+  <app-error
+    (emitCloseOverlay)="showErrorOverlay = $event"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+  ></app-error>
+</div>

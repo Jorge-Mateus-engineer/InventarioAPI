@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ClienteModel } from 'src/app/models/Clientes/cliente.model';
 import { ClientesService } from 'src/app/services/Clientes/clientes.service';
@@ -55,25 +56,35 @@ export class ClientesComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private clienteService: ClientesService) {}
+
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
 
   list(): void {
     this.clienteService.listClients().subscribe(
       (clients) => {
         this.models = clients;
       },
-      (error) => {
-        console.error('Error fetching clients', error);
-      }
+      (error) => this.handleError(error)
     );
   }
 
   saveEditedClient(confirmation: boolean): void {
     if (confirmation) {
-      this.clienteService
-        .updateClient(this.clientToEdit)
-        .subscribe((val) => console.log(val));
+      this.clienteService.updateClient(this.clientToEdit).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
@@ -81,16 +92,21 @@ export class ClientesComponent implements OnInit {
     if (confirmation) {
       this.clienteService
         .deleteClient(this.clientToDelete.id_cliente)
-        .subscribe((val) => console.log(val));
+        .subscribe(
+          (val) => '',
+          (error) => this.handleError(error)
+        );
     }
   }
 
   createClient(confirmation: boolean): void {
     debugger;
     if (confirmation) {
-      this.clienteService
-        .createClient(this.clientToCreate)
-        .subscribe((val) => console.log(val));
+      this.clienteService.createClient(this.clientToCreate).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 

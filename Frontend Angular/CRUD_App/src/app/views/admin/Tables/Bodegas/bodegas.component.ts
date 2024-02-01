@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BodegaModel } from 'src/app/models/Bodegas/bodega.model';
 import { BodegasService } from 'src/app/services/Bodegas/bodegas.service';
@@ -40,39 +41,53 @@ export class BodegasComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private bodegaService: BodegasService) {}
+
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
 
   list(): void {
     this.bodegaService.listBodegas().subscribe(
       (b) => (this.models = b),
-      (error) => {
-        console.error('Error fetching', error);
-      }
+      (error) => this.handleError(error)
     );
   }
 
   saveEditedBodega(confirmation: boolean): void {
     if (confirmation) {
-      this.bodegaService
-        .editBodega(this.bodegaToEdit)
-        .subscribe((val) => console.log(val));
+      this.bodegaService.editBodega(this.bodegaToEdit).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   createBodega(confirmation: boolean): void {
     if (confirmation) {
-      this.bodegaService
-        .createBodega(this.bodegaToCreate)
-        .subscribe((val) => console.log(val));
+      this.bodegaService.createBodega(this.bodegaToCreate).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   deleteBodega(confirmation: boolean): void {
     if (confirmation) {
-      this.bodegaService
-        .deleteBodega(this.bodegaToDelete)
-        .subscribe((val) => console.log(val));
+      this.bodegaService.deleteBodega(this.bodegaToDelete).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 

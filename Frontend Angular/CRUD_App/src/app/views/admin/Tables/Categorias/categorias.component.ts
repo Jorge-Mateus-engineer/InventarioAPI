@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaModel } from 'src/app/models/Categorias/categoria.model';
 import { CategoriasService } from 'src/app/services/Categorias/categorias.service';
@@ -32,39 +33,53 @@ export class CategoriasComponent implements OnInit {
   showEditOverlay: boolean = false;
   showDeleteOverlay: boolean = false;
   showCreateOverlay: boolean = false;
+  showErrorOverlay: boolean = false;
+
+  errorCode: String = '';
+  errorMessage: String = '';
 
   constructor(private categoriaService: CategoriasService) {}
+
+  handleError(error: HttpErrorResponse): void {
+    this.showErrorOverlay = true;
+    this.errorCode = error.status.toString();
+    this.errorMessage = error.statusText;
+  }
 
   list(): void {
     this.categoriaService.listCategorias().subscribe(
       (c) => (this.models = c),
-      (error) => {
-        console.error('Error fetching', error);
-      }
+      (error) => this.handleError(error)
     );
   }
 
   saveEditedCategoria(confirmation: boolean): void {
     if (confirmation) {
-      this.categoriaService
-        .updateCategoria(this.categoriaToEdit)
-        .subscribe((val) => console.log(val));
+      this.categoriaService.updateCategoria(this.categoriaToEdit).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   createCategoria(confirmation: boolean): void {
     if (confirmation) {
-      this.categoriaService
-        .createCategoria(this.categoriaToCreate)
-        .subscribe((val) => console.log(val));
+      this.categoriaService.createCategoria(this.categoriaToCreate).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 
   deleteCategoria(confirmation: boolean): void {
     if (confirmation) {
-      this.categoriaService
-        .deleteCategoria(this.categoriaToDelete)
-        .subscribe((val) => console.log(val));
+      this.categoriaService.deleteCategoria(this.categoriaToDelete).subscribe({
+        error: (error) => {
+          this.handleError(error);
+        },
+      });
     }
   }
 

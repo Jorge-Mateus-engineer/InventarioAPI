@@ -1,0 +1,11 @@
+<div class="overlay">
+  <div class="background" (click)="closeOverlay()"></div>
+  <div class="container">
+    <h2>Error</h2>
+    <p>HTTP error occurred:</p>
+    <br />
+    <p>{{ errorCode }} - {{ errorMessage }}</p>
+    <button mat-raised-button color="warn" (click)="closeOverlay()">OK</button>
+    <mat-icon class="close-icon" (click)="closeOverlay()">close</mat-icon>
+  </div>
+</div>
