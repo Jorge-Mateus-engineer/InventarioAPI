@@ -25,7 +25,7 @@ export class BodegasService extends BaseAPIService {
     return this.get<Array<BodegaModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 

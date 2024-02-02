@@ -25,7 +25,7 @@ namespace InventarioAPI.Infraestructura.Repositorios.Categorias
 
         public CategoriaEntity GetByName(string name)
         {
-            return _context.Categorias.Where(c => c.nombre == name).Single();
+            return _context.Categorias.Where(c => c.nombre == name).FirstOrDefault();
         }
 
         public CategoriaEntity GetById(int id)

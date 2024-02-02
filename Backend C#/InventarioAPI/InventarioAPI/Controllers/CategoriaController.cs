@@ -29,7 +29,14 @@ namespace InventarioAPI.Controllers
         public IActionResult GetByName(string name)
         {
             CategoriaContract categoria = _categoriaService.GetByName(name);
-            return Ok(categoria);
+            if (categoria != null)
+            {
+                return Ok(categoria);
+            }
+            else
+            {
+                return NotFound();
+            }
 
         }
 

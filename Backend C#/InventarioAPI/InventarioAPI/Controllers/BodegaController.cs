@@ -7,6 +7,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BodegaController : Controller
     {
         private readonly IBodegaService _bodegaService;
@@ -41,7 +42,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(BodegaContract bodega)
         {
             _bodegaService.Insert(bodega);
@@ -50,7 +50,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(BodegaContract bodega)
         {
             _bodegaService.Update(bodega);
@@ -59,7 +58,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult DeleteById(int id)
         {
             BodegaContract bodega = _bodegaService.GetByID(id);
