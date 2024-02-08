@@ -18,7 +18,7 @@ namespace InventarioAPI.Dominio.Services.Compras
 
         public void Delete(CompraContract contract)
         {
-            CompraEntity compra = _mapper.Map<CompraEntity>(_comprasRepository.GetByClientId(contract.id_cliente));
+            CompraEntity compra = _mapper.Map<CompraEntity>(_comprasRepository.GetById(contract.id_compra));
             if (compra != null)
             {
                 _comprasRepository.Delete(compra);
