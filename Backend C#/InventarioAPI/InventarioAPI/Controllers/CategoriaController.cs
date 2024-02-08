@@ -7,7 +7,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class CategoriaController : Controller
     {
         private readonly ICategoriaService _categoriaService;
@@ -42,16 +42,14 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(CategoriaContract categoria)
         {
             _categoriaService.Insert(categoria);
-            return Ok(categoria);
+            return Ok(_categoriaService.GetByName(categoria.nombre));
         }
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(CategoriaContract categoria)
         {
             CategoriaContract categoriaContract = _categoriaService.GetByName(categoria.nombre);
