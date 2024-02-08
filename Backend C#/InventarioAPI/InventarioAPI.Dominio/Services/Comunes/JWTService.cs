@@ -12,7 +12,7 @@ namespace InventarioAPI.Dominio.Services.Comunes
         private readonly IConfiguration _configuration;
         public JWTService(IConfiguration configuration)
         {
-           _configuration = configuration;
+            _configuration = configuration;
         }
 
         public string GetJWT(ClienteContract clienteContract)
@@ -49,6 +49,39 @@ namespace InventarioAPI.Dominio.Services.Comunes
 
             // Return the generated JWT token
             return jwt;
+        }
+
+        public JwtSecurityToken VerifyJWT(string jwt)
+        {
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = key,
+                ValidateIssuer = false, // Set to true if you want to validate the issuer
+                ValidateAudience = false, // Set to true if you want to validate the audience
+                ClockSkew = TimeSpan.Zero // This controls the tolerance for the token's expiration
+            };
+
+            try
+            {
+                SecurityToken validatedToken;
+                var principal = tokenHandler.ValidateToken(jwt, validationParameters, out validatedToken);
+
+                if (validatedToken is JwtSecurityToken jwtSecurityToken)
+                {
+                    return jwtSecurityToken;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

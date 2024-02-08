@@ -4,7 +4,6 @@ using InventarioAPI.Dominio.Services.Clientes;
 using InventarioAPI.Dominio.Services.Comunes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 
 namespace InventarioAPI.Controllers
 {
@@ -71,7 +70,7 @@ namespace InventarioAPI.Controllers
 
             //Regresa un statusCode 201 (created)
             return CreatedAtAction("SignUp", datos);
-             
+
         }
 
         [HttpPost]
@@ -97,6 +96,29 @@ namespace InventarioAPI.Controllers
                 }
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        [Route("[Action]")]
+        public IActionResult ValidateToken(string token)
+        {
+            if (_jwtService.VerifyJWT(token) != null)
+            {
+                var datos = new
+                {
+                    tokenValidity = "Valid Token",
+                };
+
+                return Ok(datos);
+            }
+            else
+            {
+                var datos = new
+                {
+                    tokenValidity = "The token is no longer valid",
+                };
+                return BadRequest(datos);
+            }
         }
     }
 }

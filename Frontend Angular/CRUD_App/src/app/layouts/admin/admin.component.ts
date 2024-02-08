@@ -56,6 +56,7 @@ export class AdminComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.removeItem('token');
     this.router.navigate(['auth']);
   }
 

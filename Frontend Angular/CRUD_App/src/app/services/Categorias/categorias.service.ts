@@ -26,7 +26,7 @@ export class CategoriasService extends BaseAPIService {
     return this.get<Array<CategoriaModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 

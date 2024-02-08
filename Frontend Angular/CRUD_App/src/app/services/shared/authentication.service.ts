@@ -30,16 +30,16 @@ export class AuthenticationService extends BaseAPIService {
     );
   }
 
-  public createAccount(clienteModel: ClienteModel): Observable<ClienteModel> {
-    return this.post<ClienteModel>(
-      'api/Cliente/SignUp',
-      clienteModel,
-      false
-    ).pipe(
+  public createAccount(clienteModel: ClienteModel): Observable<any> {
+    return this.post<any>('api/Cliente/SignUp', clienteModel, false).pipe(
       map((res) => {
         console.log(res);
         return res;
       })
     );
+  }
+
+  public verifyToken(token: String): Observable<any> {
+    return this.get<any>('api/Cliente/ValidateToken', `?token=${token}`, false);
   }
 }

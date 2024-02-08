@@ -16,13 +16,12 @@ export class LoginComponent {
     private _authenticationService: AuthenticationService
   ) {}
 
-  admin(): void {
-    this.router.navigate(['admin']);
-  }
-
   onSubmit(): void {
     this._authenticationService
       .loginToAPI(this.userCredentials)
-      .subscribe((val) => localStorage.setItem('token', val as string));
+      .subscribe((val) => {
+        localStorage.setItem('token', val as string);
+        this.router.navigate(['admin']);
+      });
   }
 }
