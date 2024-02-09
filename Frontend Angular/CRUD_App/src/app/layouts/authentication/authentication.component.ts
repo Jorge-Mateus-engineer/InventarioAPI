@@ -1,4 +1,3 @@
-import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/shared/authentication.service';
@@ -35,7 +34,6 @@ export class AuthenticationComponent implements OnInit {
       this._authService.verifyToken(currentToken).subscribe(
         (res) => {
           if (res.tokenValidity === 'Valid Token') {
-            console.log('Token is valid');
             this.router.navigateByUrl('/admin');
           } else {
             console.log('Token is no longer valid');

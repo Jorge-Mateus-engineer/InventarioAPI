@@ -65,7 +65,7 @@ namespace InventarioAPI.Controllers
             {
                 Nombre_de_usuario = $"{cliente.primer_nombre}",
                 Correo_de_usuario = $"{cliente.correo}",
-                JWT = _jwtService.GetJWT(cliente),
+                jwt = _jwtService.GetJWT(cliente),
             };
 
             //Regresa un statusCode 201 (created)

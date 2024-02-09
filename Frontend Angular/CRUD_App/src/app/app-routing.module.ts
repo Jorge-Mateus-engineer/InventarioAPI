@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './layouts/authentication/authentication.component';
 import { AdminComponent } from './layouts/admin/admin.component';
+import { adminGuard } from './guards/admin.guard';
 
 /*Component imports */
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [adminGuard],
     children: [
       {
         path: 'bodegas',
