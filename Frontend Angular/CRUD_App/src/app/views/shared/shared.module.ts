@@ -5,7 +5,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { UpdateComponent } from './update/update.component';
-import { ReadComponent } from './read/read.component';
 import { DeleteComponent } from './delete/delete.component';
 import { CreateComponent } from './create/create.component';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { ErrorComponent } from './error/error.component';
   declarations: [
     ListComponent,
     UpdateComponent,
-    ReadComponent,
     DeleteComponent,
     CreateComponent,
     ErrorComponent,
@@ -36,7 +34,6 @@ import { ErrorComponent } from './error/error.component';
   exports: [
     ListComponent,
     UpdateComponent,
-    ReadComponent,
     DeleteComponent,
     CreateComponent,
     ErrorComponent,
