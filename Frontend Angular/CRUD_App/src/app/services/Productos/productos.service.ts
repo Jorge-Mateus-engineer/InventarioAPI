@@ -26,7 +26,7 @@ export class ProductosService extends BaseAPIService {
     return this.get<Array<ProductoModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 

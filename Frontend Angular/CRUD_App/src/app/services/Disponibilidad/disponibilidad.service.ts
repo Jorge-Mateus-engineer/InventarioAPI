@@ -28,7 +28,7 @@ export class DisponibilidadService extends BaseAPIService {
     return this.get<Array<DisponibilidadModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 

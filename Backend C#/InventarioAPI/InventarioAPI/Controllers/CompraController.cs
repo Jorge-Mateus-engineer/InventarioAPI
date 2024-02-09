@@ -8,7 +8,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class CompraController : Controller
     {
 
@@ -54,7 +54,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(CompraContract compra)
         {
             ClienteContract associatedClient = _clientesService.GetById(compra.id_cliente);
@@ -71,7 +70,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(CompraContract compra)
         {
             CompraContract compraContract = _comprasService.GetById(compra.id_compra);
@@ -88,7 +86,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Delete(int id)
         {
             CompraContract compraContract = _comprasService.GetById(id);

@@ -9,6 +9,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DetalleCompraController : Controller
     {
         private readonly IDetalleComprasService _detalleComprasSerivce;
@@ -40,7 +41,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(DetalleCompraContract detalle)
         {
             CompraContract compraAsociada = _comprasSerivce.GetById(detalle.id_compra);
@@ -69,7 +69,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(DetalleCompraContract detalle)
         {
             CompraContract compraAsociada = _comprasSerivce.GetById(detalle.id_compra);
@@ -110,7 +109,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Delete(int id)
         {
             DetalleCompraContract detalle = _detalleComprasSerivce.GetById(id);

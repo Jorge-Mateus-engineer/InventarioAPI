@@ -7,6 +7,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DisponibilidadController : Controller
     {
         private readonly IDisponibilidadService _disponibilidadService;
@@ -42,7 +43,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(DisponibilidadContract disponibilidad)
         {
             _disponibilidadService.Insert(disponibilidad);
@@ -51,7 +51,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(DisponibilidadContract disponibilidad)
         {
             DisponibilidadContract disponibilidadContract = _disponibilidadService.GetByProductID(disponibilidad.id_producto).Where(d => d.id_bodega == disponibilidad.id_bodega).FirstOrDefault();
@@ -68,7 +67,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Delete(int idProducto, int idBodega )
         {
             DisponibilidadContract disponibilidadContract = _disponibilidadService.GetAll().Where(d => d.id_producto == idProducto && d.id_bodega == idBodega).FirstOrDefault();

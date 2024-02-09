@@ -9,6 +9,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductoController : Controller
     {
         private readonly IProductosService _productosService;
@@ -79,7 +80,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(ProductoContract producto)
         {
             CategoriaContract categoria = _categoriaService.GetById(producto.id_categoria);
@@ -105,7 +105,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(ProductoContract producto)
         {
             CategoriaContract categoria = _categoriaService.GetById(producto.id_categoria);
@@ -130,7 +129,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Delete(ProductoContract producto)
         {
             ProductoContract productoContract = _productosService.GetByName(producto.nombre);

@@ -26,7 +26,7 @@ export class ComprasService extends BaseAPIService {
     return this.get<Array<CompraModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 
@@ -34,7 +34,7 @@ export class ComprasService extends BaseAPIService {
     return this.get<Array<CompraModel>>(
       `${this.baseEndpoint}/GetByClientId`,
       `?id=${id}`,
-      false
+      true
     );
   }
 

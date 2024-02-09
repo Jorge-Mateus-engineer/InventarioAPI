@@ -28,7 +28,7 @@ export class DetalleComprasService extends BaseAPIService {
     return this.get<Array<DetalleCompraModel>>(
       `${this.baseEndpoint}/GetAll`,
       '',
-      false
+      true
     );
   }
 
@@ -36,7 +36,7 @@ export class DetalleComprasService extends BaseAPIService {
     return this.get<Array<DetalleCompraModel>>(
       `${this.baseEndpoint}/GetAll`,
       `?purchaseId=${id}`,
-      false
+      true
     );
   }
 

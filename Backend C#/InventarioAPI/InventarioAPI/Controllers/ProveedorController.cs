@@ -7,6 +7,7 @@ namespace InventarioAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProveedorController : Controller
     {
         private readonly IProveedorService _proveedorService;
@@ -42,7 +43,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPost]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Create(ProveedorContract proveedorContract)
         {
             _proveedorService.Insert(proveedorContract);
@@ -51,7 +51,6 @@ namespace InventarioAPI.Controllers
 
         [HttpPatch]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Update(ProveedorContract proveedor)
         {
             _proveedorService.Update(proveedor);
@@ -60,7 +59,6 @@ namespace InventarioAPI.Controllers
 
         [HttpDelete]
         [Route("[Action]")]
-        [Authorize]
         public IActionResult Delete(ProveedorContract proveedor)
         {
             _proveedorService.Delete(proveedor);
